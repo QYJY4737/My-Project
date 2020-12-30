@@ -6,6 +6,7 @@ import cn.congee.api.common.controller.BaseController;
 import cn.congee.api.common.domain.PageResultDTO;
 import cn.congee.api.common.domain.ResponseDTO;
 import cn.congee.api.common.domain.ValidateList;
+import cn.congee.api.constant.SwaggerTagConst;
 import cn.congee.api.module.business.peony.domain.dto.PeonyAddDTO;
 import cn.congee.api.module.business.peony.domain.dto.PeonyQueryDTO;
 import cn.congee.api.module.business.peony.domain.dto.PeonyUpdateDTO;
@@ -31,8 +32,8 @@ import java.util.List;
  * Time: 上午10:13
  **/
 @RestController
-@Api(tags = {"牡丹花"})
 @RequestMapping(value = "/peony")
+@Api(tags = {SwaggerTagConst.Admin.MANAGER_PEONY})
 public class PeonyController extends BaseController {
 
     @Autowired

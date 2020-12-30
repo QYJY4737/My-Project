@@ -45,7 +45,7 @@ public class StandardReloadService {
     @Autowired
     private ReloadResultDao reloadResultDao;
 
-    @Value("${smart-reload.time-interval}")
+    @Value("${standard-reload.time-interval}")
     private Long timeInterval;
 
     @PostConstruct

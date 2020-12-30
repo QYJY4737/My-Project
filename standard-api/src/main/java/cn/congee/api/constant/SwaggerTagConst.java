@@ -22,7 +22,7 @@ public class SwaggerTagConst {
 
         public static final String MANAGER_ROLE_PRIVILEGE = "管理端-角色权限";
 
-        public static final String MANAGER_SMART_RELOAD = "管理端-smart reload";
+        public static final String MANAGER_SMART_RELOAD = "管理端-standard reload";
 
         public static final String MANAGER_ORDER_OPERATE_LOG = "管理端-单据操作日志";
 
@@ -45,6 +45,8 @@ public class SwaggerTagConst {
         public static final String MANAGER_EMAIL = "通用-邮件发送";
 
         public static final String MANAGER_HEART_BEAT = "通用-心跳服务";
+
+        public static final String MANAGER_PEONY = "通用-牡丹花管理";
     }
 
     /**
