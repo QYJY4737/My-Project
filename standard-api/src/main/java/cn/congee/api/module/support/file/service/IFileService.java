@@ -9,6 +9,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import com.qiniu.http.Response;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -35,6 +36,30 @@ public interface IFileService {
      * @return
      */
     ResponseDTO<UploadVO> fileUpload(MultipartFile multipartFile, String path);
+
+    /**
+     * 以文件形式上传
+     *
+     * @param file
+     * @return
+     */
+    ResponseDTO<UploadVO> uploadByFile(MultipartFile file);
+
+    /**
+     * 以流形式上传
+     *
+     * @param stream
+     * @return
+     */
+    ResponseDTO<UploadVO> uploadByStream(InputStream stream);
+
+    /**
+     * 根据key删除七牛云相关文件
+     *
+     * @param key
+     * @return
+     */
+    ResponseDTO<Response> deleteByKey(String key);
 
     /**
      * 获取文件url

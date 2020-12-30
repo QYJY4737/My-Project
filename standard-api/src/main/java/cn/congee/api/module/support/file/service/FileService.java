@@ -18,6 +18,7 @@ import cn.congee.api.util.StandardBeanUtil;
 import cn.congee.api.util.StandardPageUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
+import com.qiniu.http.Response;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -79,6 +81,46 @@ public class FileService {
         // 获取文件服务
         IFileService fileService = this.getFileService(typeEnum);
         ResponseDTO<UploadVO> response = fileService.fileUpload(file, moduleTypeEnum.getPath());
+        return response;
+    }
+
+    /**
+     * 以文件形式上传
+     *
+     * @param file
+     * @param typeEnum
+     * @return
+     */
+    public ResponseDTO<UploadVO> uploadByFile(MultipartFile file, FileServiceTypeEnum typeEnum) {
+        // 获取文件服务
+        IFileService fileService = this.getFileService(typeEnum);
+        ResponseDTO<UploadVO> response = fileService.uploadByFile(file);
+        return response;
+    }
+
+    /**
+     * 以流形式上传
+     *
+     * @param stream
+     * @return
+     */
+    public ResponseDTO<UploadVO> uploadByStream(InputStream stream, FileServiceTypeEnum typeEnum) {
+        // 获取文件服务
+        IFileService fileService = this.getFileService(typeEnum);
+        ResponseDTO<UploadVO> response = fileService.uploadByStream(stream);
+        return response;
+    }
+
+    /**
+     * 根据key删除七牛云相关文件
+     *
+     * @param key
+     * @return
+     */
+    public ResponseDTO<Response> deleteByKey(String key, FileServiceTypeEnum typeEnum) {
+        // 获取文件服务
+        IFileService fileService = this.getFileService(typeEnum);
+        ResponseDTO<Response> response = fileService.deleteByKey(key);
         return response;
     }
 

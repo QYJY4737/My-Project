@@ -7,7 +7,10 @@ import cn.congee.api.module.support.file.domain.dto.OSSConfig;
 import cn.congee.api.module.support.file.domain.vo.UploadVO;
 import cn.congee.api.module.system.systemconfig.SystemConfigService;
 import cn.congee.api.module.system.systemconfig.constant.SystemConfigEnum;
+import cn.congee.api.util.StandardFileUtil;
 import cn.congee.api.util.StandardStringUtil;
+import cn.congee.api.util.StandardUploadUtil;
+import com.alibaba.fastjson.JSON;
 import com.qiniu.http.Response;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
@@ -28,6 +31,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLEncoder;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -44,6 +50,8 @@ public class FileServiceQiNiuYun implements IFileService {
     //1小时，可以自定义链接过期时间
     private static final Long expireInSeconds = 3600L;
 
+    @Autowired
+    private StandardUploadUtil standardUploadUtil;
     @Autowired
     private SystemConfigService systemConfigService;
 
@@ -173,6 +181,79 @@ public class FileServiceQiNiuYun implements IFileService {
         } finally {
         }
         return file;
+    }
+
+    /**
+     * 以文件形式上传
+     *
+     * @param file
+     * @return
+     */
+    public ResponseDTO<UploadVO> uploadByFile(MultipartFile file){
+        log.info("以文件形式上传接口入参为file=[{}]", file);
+        Map<String, Object> map = standardUploadUtil.uploadByFile(file);
+        Set<String> keys = map.keySet();
+        String key = null;
+        if(keys != null){
+            Iterator<String> it = keys.iterator();
+            while (it.hasNext()){
+                key = it.next();
+            }
+        }
+        String value = map.get(key).toString();
+        log.info("以文件形式上传接口出参为url=[{}]", JSON.toJSONString(value));
+        UploadVO localUploadVO = new UploadVO();
+        localUploadVO.setUrl(value);
+        localUploadVO.setFileName(file.getOriginalFilename());
+        localUploadVO.setFilePath(key);
+        localUploadVO.setFileSize(file.getSize());
+        return new ResponseDTO<>(localUploadVO);
+    }
+
+    /**
+     * 以流形式上传
+     *
+     * @param stream
+     * @return
+     */
+    public ResponseDTO<UploadVO> uploadByStream(InputStream stream){
+        log.info("以流形式上传接口入参为stream=[{}]", JSON.toJSONString(stream));
+        Map<String, Object> map = standardUploadUtil.uploadByStream(stream);
+        Set<String> keys = map.keySet();
+        String key = null;
+        if(keys != null){
+            Iterator<String> it = keys.iterator();
+            while (it.hasNext()){
+                key = it.next();
+            }
+        }
+        String value = map.get(key).toString();
+        log.info("以流形式上传接口出参为url=[{}]", JSON.toJSONString(value));
+        UploadVO localUploadVO = new UploadVO();
+        localUploadVO.setUrl(value);
+        try{
+            File file = StandardFileUtil.asFile(stream);
+            MultipartFile multipartFile = StandardFileUtil.fileToMultipartFile(file);
+            localUploadVO.setFileName(multipartFile.getOriginalFilename());
+            localUploadVO.setFilePath(key);
+            localUploadVO.setFileSize(multipartFile.getSize());
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return new ResponseDTO<>(localUploadVO);
+    }
+
+    /**
+     * 根据key删除七牛云相关文件
+     *
+     * @param key
+     * @return
+     */
+    public ResponseDTO<Response> deleteByKey(String key){
+        log.info("根据key删除七牛云相关文件接口入参为key=[{}]", key);
+        Response response = standardUploadUtil.deleteByKey(key);
+        log.info("根据key删除七牛云相关文件接口出参为response=[{}]", JSON.toJSONString(response));
+        return new ResponseDTO<>(response);
     }
 
 }

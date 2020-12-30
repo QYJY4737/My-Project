@@ -1,6 +1,7 @@
 package cn.congee.api.common.domain;
 
 import cn.congee.api.common.constant.ResponseCodeConst;
+import cn.congee.api.common.exception.BaseExceptionMsg;
 
 /**
  * 返回类
@@ -20,6 +21,13 @@ public class ResponseDTO<T> {
     protected T data;
 
     public ResponseDTO() {
+    }
+
+    public ResponseDTO(T data) {
+        this.data = data;
+        this.msg = BaseExceptionMsg.EXECUTE_OK.getMsg();
+        this.code = BaseExceptionMsg.EXECUTE_OK.getCode();
+        this.success = (this.code == 0) ? true : false;
     }
 
     public ResponseDTO(ResponseCodeConst responseCodeConst, String msg) {
