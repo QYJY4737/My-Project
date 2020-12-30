@@ -13,6 +13,7 @@ import cn.congee.api.third.StandardApplicationContext;
 import cn.congee.api.util.StandardBeanUtil;
 import cn.congee.api.util.StandardPageUtil;
 import cn.congee.api.util.StandardQuartzUtil;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
@@ -48,23 +49,29 @@ public class QuartzTaskService {
      * @return
      */
     public ResponseDTO<PageResultDTO<QuartzTaskVO>> query(QuartzQueryDTO queryDTO) {
+        log.info("查询列表接口入参为queryDTO=[{}]", JSON.toJSONString(queryDTO));
         Page pageParam = StandardPageUtil.convert2QueryPage(queryDTO);
         List<QuartzTaskVO> taskList = quartzTaskDao.queryList(pageParam, queryDTO);
         pageParam.setRecords(taskList);
-        return ResponseDTO.succData(StandardPageUtil.convert2PageResult(pageParam));
+        PageResultDTO pageResultDTO = StandardPageUtil.convert2PageResult(pageParam);
+        log.info("查询列表接口出参为pageResultDTO=[{}]", JSON.toJSONString(pageResultDTO));
+        return ResponseDTO.succData(pageResultDTO);
     }
 
     /**
-     * 查询运行日志
+     * 查询任务运行日志
      *
      * @param queryDTO
      * @return
      */
     public ResponseDTO<PageResultDTO<QuartzTaskLogVO>> queryLog(QuartzLogQueryDTO queryDTO) {
+        log.info("查询任务运行日志接口入参为queryDTO=[{}]", JSON.toJSONString(queryDTO));
         Page pageParam = StandardPageUtil.convert2QueryPage(queryDTO);
         List<QuartzTaskLogVO> taskList = quartzTaskLogDao.queryList(pageParam, queryDTO);
         pageParam.setRecords(taskList);
-        return ResponseDTO.succData(StandardPageUtil.convert2PageResult(pageParam));
+        PageResultDTO pageResultDTO = StandardPageUtil.convert2PageResult(pageParam);
+        log.info("查询任务运行日志接口出参为pageResultDTO=[{}]", JSON.toJSONString(pageResultDTO));
+        return ResponseDTO.succData(pageResultDTO);
     }
 
     /**
@@ -76,6 +83,7 @@ public class QuartzTaskService {
      */
     @Transactional(rollbackFor = Throwable.class)
     public ResponseDTO<String> saveOrUpdateTask(QuartzTaskDTO quartzTaskDTO) throws Exception {
+        log.info("新建更新任务接口入参为quartzTaskDTO=[{}]", JSON.toJSONString(quartzTaskDTO));
         ResponseDTO baseValid = this.baseValid(quartzTaskDTO);
         if (!baseValid.isSuccess()) {
             return baseValid;
@@ -134,13 +142,14 @@ public class QuartzTaskService {
     }
 
     /**
-     * 立即运行
+     * 立即运行某个任务
      *
      * @param taskId
      * @return
      * @throws Exception
      */
     public ResponseDTO<String> runTask(Long taskId) throws Exception {
+        log.info("立即运行某个任务接口入参为taskId=[{}]", taskId);
         QuartzTaskEntity quartzTaskEntity = quartzTaskDao.selectById(taskId);
         if (quartzTaskEntity == null) {
             return ResponseDTO.wrap(ResponseCodeConst.ERROR_PARAM, "task不存在");
@@ -150,7 +159,7 @@ public class QuartzTaskService {
     }
 
     /**
-     * 暂停运行
+     * 暂停运行某个任务
      *
      * @param taskId
      * @return
@@ -158,6 +167,7 @@ public class QuartzTaskService {
      */
     @Transactional(rollbackFor = Throwable.class)
     public ResponseDTO<String> pauseTask(Long taskId) throws Exception {
+        log.info("暂停运行某个任务接口入参为taskId=[{}]", taskId);
         QuartzTaskEntity quartzTaskEntity = quartzTaskDao.selectById(taskId);
         if (quartzTaskEntity == null) {
             return ResponseDTO.wrap(ResponseCodeConst.ERROR_PARAM, "task不存在");
@@ -169,7 +179,7 @@ public class QuartzTaskService {
     }
 
     /**
-     * 恢复任务
+     * 恢复运行某个任务
      *
      * @param taskId
      * @return
@@ -177,6 +187,7 @@ public class QuartzTaskService {
      */
     @Transactional(rollbackFor = Throwable.class)
     public ResponseDTO<String> resumeTask(Long taskId) throws Exception {
+        log.info("恢复运行某个任务接口入参为taskId=[{}]", taskId);
         QuartzTaskEntity quartzTaskEntity = quartzTaskDao.selectById(taskId);
         if (quartzTaskEntity == null) {
             return ResponseDTO.wrap(ResponseCodeConst.ERROR_PARAM, "task不存在");
@@ -188,13 +199,14 @@ public class QuartzTaskService {
     }
 
     /**
-     * 删除任务
+     * 删除某个任务
      *
      * @param taskId
      * @return
      * @throws Exception
      */
     public ResponseDTO<String> deleteTask(Long taskId) throws Exception {
+        log.info("删除某个任务接口入参为taskId=[{}]", taskId);
         QuartzTaskEntity quartzTaskEntity = quartzTaskDao.selectById(taskId);
         if (quartzTaskEntity == null) {
             return ResponseDTO.wrap(ResponseCodeConst.ERROR_PARAM, "task不存在");

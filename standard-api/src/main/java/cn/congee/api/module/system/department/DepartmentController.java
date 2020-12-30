@@ -60,13 +60,13 @@ public class DepartmentController {
         return departmentService.updateDepartment(departmentUpdateDTO);
     }
 
-    @ApiOperation(value = "删除部门", notes = "删除部门")
+    @ApiOperation(value = "根据id删除部门", notes = "根据id删除部门")
     @PostMapping("/delete/{departmentId}")
     public ResponseDTO<String> delDepartment(@PathVariable("departmentId") Long departmentId) {
         return departmentService.delDepartment(departmentId);
     }
 
-    @ApiOperation(value = "获取部门信息", notes = "获取部门")
+    @ApiOperation(value = "根据id获取部门信息", notes = "根据id获取部门信息")
     @GetMapping("/query/{departmentId}")
     public ResponseDTO<DepartmentVO> getDepartment(@PathVariable("departmentId") Long departmentId) {
         return departmentService.getDepartmentById(departmentId);
@@ -79,19 +79,19 @@ public class DepartmentController {
     }
 
 
-    @ApiOperation(value = "上下移动")
+    @ApiOperation(value = "上下移动", notes = "上下移动")
     @GetMapping("/upOrDown/{departmentId}/{swapId}")
     public ResponseDTO<String> upOrDown(@PathVariable("departmentId") Long departmentId,@PathVariable("swapId") Long swapId) {
         return departmentService.upOrDown(departmentId,swapId);
     }
 
-    @ApiOperation(value = "升级")
+    @ApiOperation(value = "部门升级", notes = "部门升级")
     @GetMapping("/upgrade/{departmentId}")
     public ResponseDTO<String> upgrade(@PathVariable("departmentId") Long departmentId) {
         return departmentService.upgrade(departmentId);
     }
 
-    @ApiOperation(value = "降级")
+    @ApiOperation(value = "部门降级", notes = "部门降级")
     @GetMapping("/downgrade/{departmentId}/{preId}")
     public ResponseDTO<String> downgrade(@PathVariable("departmentId") Long departmentId,@PathVariable("preId") Long preId) {
         return departmentService.downgrade(departmentId,preId);

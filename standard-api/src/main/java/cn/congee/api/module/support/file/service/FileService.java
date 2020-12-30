@@ -16,9 +16,11 @@ import cn.congee.api.module.system.login.domain.RequestTokenBO;
 import cn.congee.api.util.StandardBaseEnumUtil;
 import cn.congee.api.util.StandardBeanUtil;
 import cn.congee.api.util.StandardPageUtil;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
 import com.qiniu.http.Response;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,7 @@ import java.util.stream.Collectors;
  * Date: 2020/12/29
  * Time: 上午11:07
  **/
+@Slf4j
 @Service
 public class FileService {
 
@@ -74,6 +77,7 @@ public class FileService {
      * @return
      */
     public ResponseDTO<UploadVO> fileUpload(MultipartFile file, FileServiceTypeEnum typeEnum, Integer moduleType) {
+        log.info("文件上传服务接口入参为file=[{}],typeEnum=[{}],moduleType=[{}]", file, typeEnum, moduleType);
         FileModuleTypeEnum moduleTypeEnum = StandardBaseEnumUtil.getEnumByValue(moduleType, FileModuleTypeEnum.class);
         if (null == moduleTypeEnum) {
             return ResponseDTO.wrap(FileResponseCodeConst.FILE_MODULE_ERROR);
@@ -81,6 +85,7 @@ public class FileService {
         // 获取文件服务
         IFileService fileService = this.getFileService(typeEnum);
         ResponseDTO<UploadVO> response = fileService.fileUpload(file, moduleTypeEnum.getPath());
+        log.info("文件上传服务接口出参为response=[{}]", JSON.toJSONString(response));
         return response;
     }
 
@@ -131,6 +136,7 @@ public class FileService {
      * @return
      */
     public ResponseDTO<String> getFileUrl(String path, FileServiceTypeEnum typeEnum) {
+        log.info("根据文件绝对路径 获取文件URL接口入参为path=[{}],typeEnum=[{}]", path, typeEnum);
         IFileService fileService = this.getFileService(typeEnum);
         return fileService.getFileUrl(path);
     }
@@ -185,6 +191,7 @@ public class FileService {
      * @return
      */
     public ResponseDTO<PageResultDTO<FileVO>> queryListByPage(FileQueryDTO queryDTO) {
+        log.info("分页查询文件列表接口入参为queryDTO=[{}]", JSON.toJSONString(queryDTO));
         Page page = StandardPageUtil.convert2QueryPage(queryDTO);
         List<FileVO> fileList = fileDao.queryListByPage(page, queryDTO);
         if (CollectionUtils.isNotEmpty(fileList)) {
@@ -196,6 +203,7 @@ public class FileService {
             });
         }
         PageResultDTO<FileVO> pageResultDTO = StandardPageUtil.convert2PageResult(page, fileList);
+        log.info("分页查询文件列表接口出参为pageResultDTO=[{}]", JSON.toJSONString(pageResultDTO));
         return ResponseDTO.succData(pageResultDTO);
     }
 
@@ -207,6 +215,7 @@ public class FileService {
      * @return
      */
     public ResponseEntity<byte[]> downLoadById(Long id, HttpServletRequest request) {
+        log.info("根据id 下载文件接口入参为id=[{}],request=[{}]", id, JSON.toJSONString(request));
         FileEntity entity = fileDao.selectById(id);
         if (null == entity) {
             throw new RuntimeException("文件信息不存在");
@@ -216,6 +225,7 @@ public class FileService {
         FileServiceTypeEnum serviceTypeEnum = StandardBaseEnumUtil.getEnumByValue(entity.getFileLocationType(), FileServiceTypeEnum.class);
         IFileService fileService = this.getFileService(serviceTypeEnum);
         ResponseEntity<byte[]> stream = fileService.fileDownload(entity.getFilePath(), entity.getFileName(), request);
+        log.info("根据id 下载文件接口出参为stream=[{}]", JSON.toJSONString(stream));
         return stream;
     }
 
@@ -225,6 +235,7 @@ public class FileService {
      * @return
      */
     public ResponseDTO<String> saveFile(FileAddDTO addDTO, RequestTokenBO requestToken) {
+        log.info("系统文件保存通用接口入参为addDTO=[{}],requestToken=[{}]", JSON.toJSONString(addDTO), JSON.toJSONString(requestToken));
         FileEntity entity = StandardBeanUtil.copy(addDTO,FileEntity.class);
         entity.setCreaterUser(requestToken.getRequestUserId());
         entity.setCreateTime(new Date());

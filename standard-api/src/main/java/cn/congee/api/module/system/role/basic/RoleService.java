@@ -8,6 +8,8 @@ import cn.congee.api.module.system.role.basic.domain.entity.RoleEntity;
 import cn.congee.api.module.system.role.roleemployee.RoleEmployeeDao;
 import cn.congee.api.module.system.role.roleprivilege.RolePrivilegeDao;
 import cn.congee.api.util.StandardBeanUtil;
+import com.alibaba.fastjson.JSON;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,7 @@ import java.util.List;
  * Date: 2020/12/29
  * Time: 下午2:58
  **/
+@Slf4j
 @Service
 public class RoleService {
 
@@ -40,6 +43,7 @@ public class RoleService {
      * @return ResponseDTO
      */
     public ResponseDTO addRole(RoleAddDTO roleAddDTO) {
+        log.info("新增添加角色接口入参为roleAddDTO=[{}]", JSON.toJSONString(roleAddDTO));
         RoleEntity employeeRoleEntity = roleDao.getByRoleName(roleAddDTO.getRoleName());
         if (null != employeeRoleEntity) {
             return ResponseDTO.wrap(RoleResponseCodeConst.ROLE_NAME_EXISTS);
@@ -57,6 +61,7 @@ public class RoleService {
      */
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO deleteRole(Long roleId) {
+        log.info("根据角色id 删除接口入参为roleId=[{}]", roleId);
         RoleEntity roleEntity = roleDao.selectById(roleId);
         if (null == roleEntity) {
             return ResponseDTO.wrap(RoleResponseCodeConst.ROLE_NOT_EXISTS);
@@ -75,6 +80,7 @@ public class RoleService {
      */
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> updateRole(RoleUpdateDTO roleUpdateDTO) {
+        log.info("更新角色接口入参为roleUpdateDTO=[{}]", JSON.toJSONString(roleUpdateDTO));
         if (null == roleDao.selectById(roleUpdateDTO.getId())) {
             return ResponseDTO.wrap(RoleResponseCodeConst.ROLE_NOT_EXISTS);
         }
@@ -94,11 +100,13 @@ public class RoleService {
      * @return ResponseDTO<RoleDTO>
      */
     public ResponseDTO<RoleVO> getRoleById(Long roleId) {
+        log.info("根据id获取角色数据接口入参为roleId=[{}]", roleId);
         RoleEntity roleEntity = roleDao.selectById(roleId);
         if (null == roleEntity) {
             return ResponseDTO.wrap(RoleResponseCodeConst.ROLE_NOT_EXISTS);
         }
         RoleVO role = StandardBeanUtil.copy(roleEntity, RoleVO.class);
+        log.info("根据id获取角色数据接口出参为role=[{}]", JSON.toJSONString(role));
         return ResponseDTO.succData(role);
     }
 
@@ -110,6 +118,7 @@ public class RoleService {
     public ResponseDTO<List<RoleVO>> getAllRole() {
         List<RoleEntity> roleEntityList = roleDao.selectList(null);
         List<RoleVO> roleList = StandardBeanUtil.copyList(roleEntityList, RoleVO.class);
+        log.info("获取所有角色列表接口出参为roleList=[{}]", JSON.toJSONString(roleList));
         return ResponseDTO.succData(roleList);
     }
 

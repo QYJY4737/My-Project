@@ -38,31 +38,31 @@ public class PeonyController extends BaseController {
     @Autowired
     private PeonyService peonyService;
 
-    @ApiOperation(value = "分页查询牡丹花",notes = "@author wgb")
+    @ApiOperation(value = "分页查询牡丹花",notes = "分页查询牡丹花")
     @PostMapping("/page/query")
     public ResponseDTO<PageResultDTO<PeonyVO>> queryByPage(@RequestBody PeonyQueryDTO queryDTO) {
         return peonyService.queryByPage(queryDTO);
     }
 
-    @ApiOperation(value = "添加牡丹花",notes = "@author wgb")
+    @ApiOperation(value = "添加牡丹花",notes = "添加牡丹花")
     @PostMapping("/add")
     public ResponseDTO<String> add(@RequestBody @Validated PeonyAddDTO addTO){
         return peonyService.add(addTO);
     }
 
-    @ApiOperation(value="修改牡丹花",notes = "@author wgb")
+    @ApiOperation(value="修改牡丹花",notes = "修改牡丹花")
     @PostMapping("/update")
     public ResponseDTO<String> update(@RequestBody @Validated PeonyUpdateDTO updateDTO){
         return peonyService.update(updateDTO);
     }
 
-    @ApiOperation(value="批量删除牡丹花",notes = "@author wgb")
+    @ApiOperation(value="批量删除牡丹花",notes = "批量删除牡丹花")
     @PostMapping("/deleteByIds")
     public ResponseDTO<String> delete(@RequestBody @Validated ValidateList<Long> idList) {
         return peonyService.deleteByIds(idList);
     }
 
-    @ApiOperation(value = "批量导出", notes = "@author wgb")
+    @ApiOperation(value = "批量查询导出对象", notes = "批量查询导出对象")
     @PostMapping("/export/batch")
     public void batchExport(@RequestBody @Validated ValidateList<Long> idList, HttpServletResponse response) {
         //查询数据
@@ -73,7 +73,7 @@ public class PeonyController extends BaseController {
         downloadExcel("牡丹花", workbook, response);
     }
 
-    @ApiOperation(value = "导出全部", notes = "@author wgb")
+    @ApiOperation(value = "查询全部导出对象", notes = "查询全部导出对象")
     @PostMapping("/export/all")
     public void exportAll(@RequestBody @Validated PeonyQueryDTO queryDTO, HttpServletResponse response) {
         //查询数据

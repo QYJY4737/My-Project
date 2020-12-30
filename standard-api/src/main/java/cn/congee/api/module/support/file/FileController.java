@@ -73,20 +73,20 @@ public class FileController {
         return fileService.getFileUrl(path, FileServiceTypeEnum.QI_NIU_OSS);
     }
 
-    @ApiOperation(value = "系统文件查询")
+    @ApiOperation(value = "系统文件查询", notes = "系统文件查询")
     @PostMapping("/query")
     public ResponseDTO<PageResultDTO<FileVO>> queryListByPage(@RequestBody FileQueryDTO queryDTO) {
         return fileService.queryListByPage(queryDTO);
     }
 
-    @ApiOperation(value = "系统文件下载通用接口（流下载）")
+    @ApiOperation(value = "系统文件下载通用接口（流下载）", notes = "系统文件下载通用接口（流下载）")
     @GetMapping("/downLoad")
     @NoNeedLogin
     public ResponseEntity<byte[]> downLoadById(Long id, HttpServletRequest request) {
         return fileService.downLoadById(id, request);
     }
 
-    @ApiOperation(value = "系统文件保存通用接口")
+    @ApiOperation(value = "系统文件保存通用接口", notes = "系统文件保存通用接口")
     @PostMapping("/save")
     public ResponseDTO<String> saveFile(@Valid @RequestBody FileAddDTO addDTO) {
         RequestTokenBO requestToken = StandardRequestTokenUtil.getRequestUser();

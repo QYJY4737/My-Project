@@ -30,21 +30,21 @@ public class DataScopeController {
     @Autowired
     private DataScopeService dataScopeService;
 
-    @ApiOperation(value = "获取当前系统所配置的所有数据范围")
+    @ApiOperation(value = "获取当前系统所配置的所有数据范围", notes = "获取当前系统所配置的所有数据范围")
     @GetMapping("/list")
     @NoValidPrivilege
     public ResponseDTO<List<DataScopeAndViewTypeVO>> dataScopeList() {
         return dataScopeService.dataScopeList();
     }
 
-    @ApiOperation(value = "获取某角色所设置的数据范围")
+    @ApiOperation(value = "获取某角色所设置的数据范围", notes = "获取某角色所设置的数据范围")
     @GetMapping("/listByRole/{roleId}")
     @NoValidPrivilege
     public ResponseDTO<List<DataScopeSelectVO>> dataScopeListByRole(@PathVariable Long roleId) {
         return dataScopeService.dataScopeListByRole(roleId);
     }
 
-    @ApiOperation(value = "批量设置某角色数据范围")
+    @ApiOperation(value = "批量设置某角色数据范围", notes = "批量设置某角色数据范围")
     @PostMapping("/batchSet")
     @NoValidPrivilege
     public ResponseDTO<String> dataScopeBatchSet(@RequestBody @Valid DataScopeBatchSetRoleDTO batchSetRoleDTO) {

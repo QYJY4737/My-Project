@@ -13,6 +13,7 @@ import cn.congee.api.util.StandardRequestTokenUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +42,6 @@ public class LoginController {
         return loginService.login(loginForm, request);
     }
 
-
     @GetMapping("/get")
     @ApiOperation(value = "获取session", notes = "获取session")
     @NoValidPrivilege
@@ -64,8 +64,8 @@ public class LoginController {
     @GetMapping("/verificationCode")
     @ApiOperation(value = "获取验证码", notes = "获取验证码")
     @NoNeedLogin
-    public ResponseDTO<KaptchaVO> verificationCode() {
-        return loginService.verificationCode();
+    public ResponseDTO<KaptchaVO> verificationCode(@RequestHeader HttpHeaders httpHeaders) {
+        return loginService.verificationCode(httpHeaders);
     }
 
 }

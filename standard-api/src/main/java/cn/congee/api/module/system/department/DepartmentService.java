@@ -8,6 +8,8 @@ import cn.congee.api.module.system.department.domain.entity.DepartmentEntity;
 import cn.congee.api.module.system.employee.EmployeeDao;
 import cn.congee.api.module.system.employee.domain.dto.EmployeeDTO;
 import cn.congee.api.util.StandardBeanUtil;
+import com.alibaba.fastjson.JSON;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,7 @@ import java.util.stream.Collectors;
  * Date: 2020/12/29
  * Time: 下午2:26
  **/
+@Slf4j
 @Service
 public class DepartmentService {
 
@@ -45,8 +48,10 @@ public class DepartmentService {
      * @return
      */
     public ResponseDTO<List<DepartmentVO>> listDepartment() {
+        log.info("查询部门树形列表接口入参为空");
         List<DepartmentVO> departmentVOList = departmentDao.listAll();
         List<DepartmentVO> result = departmentTreeService.buildTree(departmentVOList);
+        log.info("查询部门树形列表接口出参为result=[{}]", JSON.toJSONString(result));
         return ResponseDTO.succData(result);
     }
 
@@ -57,7 +62,7 @@ public class DepartmentService {
      * @return
      */
     public ResponseDTO<List<DepartmentVO>> listAllDepartmentEmployee(String departmentName) {
-
+        log.info("获取所有部门和员工信息接口入参为departmentName=[{}]", departmentName);
         // 获取全部部门列表
         List<DepartmentVO> departmentVOList = departmentDao.listAll();
         if (StringUtils.isNotBlank(departmentName)) {
@@ -82,6 +87,7 @@ public class DepartmentService {
             departmentVO.setEmployees(employeeDTOList);
         });
         List<DepartmentVO> result = departmentTreeService.buildTree(departmentVOList);
+        log.info("获取所有部门和员工信息接口出参为result=[{}]", JSON.toJSONString(result));
         return ResponseDTO.succData(result);
     }
 
@@ -132,6 +138,7 @@ public class DepartmentService {
      */
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> addDepartment(DepartmentCreateDTO departmentCreateDTO) {
+        log.info("新增添加部门接口入参为departmentCreateDTO=[{}]", JSON.toJSONString(departmentCreateDTO));
         DepartmentEntity departmentEntity = StandardBeanUtil.copy(departmentCreateDTO, DepartmentEntity.class);
         departmentEntity.setSort(0L);
         departmentDao.insert(departmentEntity);
@@ -148,6 +155,7 @@ public class DepartmentService {
      */
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> updateDepartment(DepartmentUpdateDTO updateDTO) {
+        log.info("更新部门信息接口入参为updateDTO=[{}]", JSON.toJSONString(updateDTO));
         if (updateDTO.getParentId() == null) {
             return ResponseDTO.wrap(DepartmentResponseCodeConst.PARENT_ID_ERROR);
         }
@@ -171,6 +179,7 @@ public class DepartmentService {
      */
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> delDepartment(Long departmentId) {
+        log.info("根据id删除部门接口入参为departmentId=[{}]", departmentId);
         // 是否有子级部门
         int subDepartmentNum = departmentDao.countSubDepartment(departmentId);
         if (subDepartmentNum > 0) {
@@ -193,21 +202,25 @@ public class DepartmentService {
      * @return AjaxResult<DepartmentVO>
      */
     public ResponseDTO<DepartmentVO> getDepartmentById(Long departmentId) {
+        log.info("根据id获取部门信息接口入参为departmentId=[{}]", departmentId);
         DepartmentEntity departmentEntity = departmentDao.selectById(departmentId);
         if (departmentEntity == null) {
             return ResponseDTO.wrap(DepartmentResponseCodeConst.DEPT_NOT_EXISTS);
         }
         DepartmentVO departmentVO = StandardBeanUtil.copy(departmentEntity, DepartmentVO.class);
+        log.info("根据id获取部门信息接口出参为departmentVO=[{}]", JSON.toJSONString(departmentVO));
         return ResponseDTO.succData(departmentVO);
     }
 
     /**
-     * 获取所有部门
+     * 查询部门列表
      *
      * @return
      */
     public ResponseDTO<List<DepartmentVO>> listAll() {
+        log.info("查询部门列表接口入参为空");
         List<DepartmentVO> departmentVOList = departmentDao.listAll();
+        log.info("查询部门列表接口出参为departmentVOList=[{}]", JSON.toJSONString(departmentVOList));
         return ResponseDTO.succData(departmentVOList);
     }
 
@@ -220,6 +233,7 @@ public class DepartmentService {
      */
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> upOrDown(Long departmentId, Long swapId) {
+        log.info("上下移动接口入参为departmentVOList=[{}],swapId=[{}]", departmentId, swapId);
         DepartmentEntity departmentEntity = departmentDao.selectById(departmentId);
         if (departmentEntity == null) {
             return ResponseDTO.wrap(DepartmentResponseCodeConst.NOT_EXISTS);
@@ -244,6 +258,7 @@ public class DepartmentService {
      */
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> upgrade(Long departmentId) {
+        log.info("部门升级接口入参为departmentId=[{}]", departmentId);
         DepartmentEntity departmentEntity = departmentDao.selectById(departmentId);
         if (departmentEntity == null) {
             return ResponseDTO.wrap(DepartmentResponseCodeConst.NOT_EXISTS);
@@ -267,6 +282,7 @@ public class DepartmentService {
      */
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> downgrade(Long departmentId, Long preId) {
+        log.info("部门降级接口入参为departmentId=[{}],preId=[{}]", departmentId, preId);
         DepartmentEntity departmentEntity = departmentDao.selectById(departmentId);
         if (departmentEntity == null) {
             return ResponseDTO.wrap(DepartmentResponseCodeConst.NOT_EXISTS);

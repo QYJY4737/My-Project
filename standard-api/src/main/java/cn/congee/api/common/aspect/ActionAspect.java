@@ -1,5 +1,7 @@
 package cn.congee.api.common.aspect;
 
+import cn.congee.api.module.system.login.domain.RequestTokenBO;
+import cn.congee.api.util.StandardRequestTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -53,6 +55,13 @@ public class ActionAspect {
         while (enu.hasMoreElements()) {
             String paraName = enu.nextElement();
             log.info(paraName + ":    {}", request.getParameter(paraName));
+        }
+        try {
+            RequestTokenBO requestUser = StandardRequestTokenUtil.getRequestUser();
+            log.info("当前登录用户ID={}", requestUser.getRequestUserId());
+        } catch (Exception e) {
+            log.error("当前用户未登录" + e.getMessage());
+            e.printStackTrace();
         }
     }
 

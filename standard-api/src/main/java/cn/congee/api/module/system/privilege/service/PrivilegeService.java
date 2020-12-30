@@ -8,7 +8,9 @@ import cn.congee.api.module.system.privilege.dao.PrivilegeDao;
 import cn.congee.api.module.system.privilege.domain.dto.*;
 import cn.congee.api.module.system.privilege.domain.entity.PrivilegeEntity;
 import cn.congee.api.module.system.role.roleprivilege.RolePrivilegeDao;
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,7 @@ import java.util.stream.Collectors;
  * Date: 2020/12/29
  * Time: 下午2:51
  **/
+@Slf4j
 @Service
 public class PrivilegeService {
 
@@ -46,6 +49,7 @@ public class PrivilegeService {
      */
     public ResponseDTO<List<PrivilegeRequestUrlVO>> getPrivilegeUrlDTOList() {
         List<PrivilegeRequestUrlVO> privilegeUrlList = privilegeRequestUrlService.getPrivilegeList();
+        log.info("获取系统所有请求路径接口出参为privilegeUrlList=[{}]", JSON.toJSONString(privilegeUrlList));
         return ResponseDTO.succData(privilegeUrlList);
     }
 
@@ -57,6 +61,7 @@ public class PrivilegeService {
      */
     @Transactional(rollbackFor = Throwable.class)
     public ResponseDTO<String> menuBatchSave(List<PrivilegeMenuDTO> menuList) {
+        log.info("批量保存权限菜单项接口出参为menuList=[{}]", JSON.toJSONString(menuList));
         if (CollectionUtils.isEmpty(menuList)) {
             return ResponseDTO.succ();
         }
@@ -158,7 +163,7 @@ public class PrivilegeService {
             vo.setUrl(e.getUrl());
             return vo;
         }).collect(Collectors.toList());
-
+        log.info("查询所有的权限菜单接口出参为voList=[{}]", JSON.toJSONString(voList));
         return ResponseDTO.succData(voList);
     }
 
@@ -170,6 +175,7 @@ public class PrivilegeService {
      * @return
      */
     public ResponseDTO<String> functionSaveOrUpdate(PrivilegeFunctionDTO privilegeFunctionDTO) {
+        log.info("保存更新功能点接口出参为privilegeFunctionDTO=[{}]", JSON.toJSONString(privilegeFunctionDTO));
         String functionKey = privilegeFunctionDTO.getFunctionKey();
         PrivilegeEntity functionEntity = privilegeDao.selectByKey(functionKey);
         if (functionEntity == null) {
@@ -180,17 +186,17 @@ public class PrivilegeService {
         functionEntity.setParentKey(privilegeFunctionDTO.getMenuKey());
         functionEntity.setSort(privilegeFunctionDTO.getSort());
         privilegeDao.updateById(functionEntity);
-
         return ResponseDTO.succ();
     }
 
     /**
-     * 查询功能点
+     * 查询菜单功能点
      *
      * @param menuKey
      * @return
      */
     public ResponseDTO<List<PrivilegeFunctionVO>> functionQuery(String menuKey) {
+        log.info("查询菜单功能点接口入参为menuKey=[{}]", menuKey);
         List<PrivilegeEntity> functionPrivilegeList = privilegeDao.selectByParentKey(menuKey);
         if (CollectionUtils.isEmpty(functionPrivilegeList)) {
             return ResponseDTO.succData(Lists.newArrayList());
@@ -205,11 +211,19 @@ public class PrivilegeService {
             functionDTO.setSort(functionEntity.getSort());
             functionList.add(functionDTO);
         }
+        log.info("查询菜单功能点接口出参为functionList=[{}]", JSON.toJSONString(functionList));
         return ResponseDTO.succData(functionList);
     }
 
+    /**
+     * 批量保存功能点
+     *
+     * @param functionList
+     * @return
+     */
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> batchSaveFunctionList(ValidateList<PrivilegeFunctionDTO> functionList) {
+        log.info("批量保存功能点接口出参为functionList=[{}]", JSON.toJSONString(functionList));
         String menuKey = functionList.get(0).getMenuKey();
         PrivilegeEntity privilegeEntity = privilegeDao.selectByKey(menuKey);
         if (privilegeEntity == null) {

@@ -30,21 +30,21 @@ public class EmailController {
     @Autowired
     private EmailService emailService;
 
-    @ApiOperation(value = "分页查询",notes = "@author wgb")
+    @ApiOperation(value = "分页查询邮件",notes = "分页查询邮件")
     @PostMapping("/page/query")
     @NoValidPrivilege
     public ResponseDTO<PageResultDTO<EmailVO>> queryByPage(@RequestBody @Validated EmailQueryDTO queryDTO) {
         return emailService.queryByPage(queryDTO);
     }
 
-    @ApiOperation(value = "添加",notes = "@author wgb")
+    @ApiOperation(value = "添加邮件",notes = "添加邮件")
     @PostMapping("/add")
     @NoValidPrivilege
     public ResponseDTO<Long> add(@RequestBody @Valid EmailDTO addTO){
         return emailService.add(addTO);
     }
 
-    @ApiOperation(value="修改",notes = "@author wgb")
+    @ApiOperation(value="更新邮件",notes = "更新邮件")
     @PostMapping("/update")
     @NoValidPrivilege
     public ResponseDTO<Long> update(@RequestBody @Valid EmailDTO updateDTO){
@@ -52,7 +52,7 @@ public class EmailController {
     }
 
 
-    @ApiOperation(value="删除",notes = "@author wgb")
+    @ApiOperation(value="根据id删除邮件",notes = "根据id删除邮件")
     @GetMapping("/delete/{id}")
     @NoValidPrivilege
     public ResponseDTO<String> delete(@PathVariable("id") Long id){
@@ -60,7 +60,7 @@ public class EmailController {
     }
 
 
-    @ApiOperation(value="详情",notes = "@author wgb")
+    @ApiOperation(value="根据id查询邮件详情",notes = "根据id查询邮件详情")
     @GetMapping("/detail/{id}")
     @NoValidPrivilege
     public ResponseDTO<EmailVO> detail(@PathVariable("id") Long id){
@@ -68,7 +68,7 @@ public class EmailController {
     }
 
 
-    @ApiOperation(value="发送",notes = "@author wgb")
+    @ApiOperation(value="发送某个已创建的邮件",notes = "发送某个已创建的邮件")
     @GetMapping("/send/{id}")
     @NoValidPrivilege
     public ResponseDTO<String> send(@PathVariable("id") Long id){

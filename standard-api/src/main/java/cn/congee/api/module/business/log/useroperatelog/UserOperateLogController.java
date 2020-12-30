@@ -25,20 +25,20 @@ public class UserOperateLogController {
     @Autowired
     private UserOperateLogService userOperateLogService;
 
-    @ApiOperation(value = "分页查询",notes = "@author wgb")
+    @ApiOperation(value = "分页查询用户操作日志",notes = "分页查询用户操作日志")
     @PostMapping("/page/query")
     public ResponseDTO<PageResultDTO<UserOperateLogDTO>> queryByPage(@RequestBody UserOperateLogQueryDTO queryDTO) {
         return userOperateLogService.queryByPage(queryDTO);
     }
 
-    @ApiOperation(value="删除",notes = "@author wgb")
+    @ApiOperation(value="根据id删除用户操作日志",notes = "根据id删除用户操作日志")
     @GetMapping("/delete/{id}")
     public ResponseDTO<String> delete(@PathVariable("id") Long id){
         return userOperateLogService.delete(id);
     }
 
 
-    @ApiOperation(value="详情",notes = "@author wgb")
+    @ApiOperation(value="根据id查询用户操作日志详情",notes = "根据id查询用户操作日志详情")
     @GetMapping("/detail/{id}")
     public ResponseDTO<UserOperateLogDTO> detail(@PathVariable("id") Long id){
         return userOperateLogService.detail(id);

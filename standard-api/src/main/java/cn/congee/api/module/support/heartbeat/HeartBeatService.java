@@ -10,6 +10,7 @@ import cn.congee.api.common.heartbeat.HeartBeatRecordDTO;
 import cn.congee.api.config.StandardHeartBeatConfig;
 import cn.congee.api.util.StandardBeanUtil;
 import cn.congee.api.util.StandardPageUtil;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,10 +76,18 @@ public class HeartBeatService extends AbstractHeartBeatCommand {
 
     }
 
+    /**
+     * 查询心跳记录
+     *
+     * @param pageParamDTO
+     * @return
+     */
     public ResponseDTO<PageResultDTO<HeartBeatRecordVO>> pageQuery(PageParamDTO pageParamDTO) {
+        log.info("查询心跳记录接口入参为pageParamDTO=[{}]", JSON.toJSONString(pageParamDTO));
         Page pageQueryInfo = StandardPageUtil.convert2QueryPage(pageParamDTO);
         List<HeartBeatRecordVO> recordVOList = heartBeatRecordDao.pageQuery(pageQueryInfo);
         PageResultDTO<HeartBeatRecordVO> pageResultDTO = StandardPageUtil.convert2PageResult(pageQueryInfo, recordVOList);
+        log.info("查询心跳记录接口出参为pageResultDTO=[{}]", JSON.toJSONString(pageResultDTO));
         return ResponseDTO.succData(pageResultDTO);
 
     }

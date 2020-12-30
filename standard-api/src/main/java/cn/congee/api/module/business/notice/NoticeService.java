@@ -14,7 +14,9 @@ import cn.congee.api.module.support.websocket.WebSocketServer;
 import cn.congee.api.module.system.login.domain.RequestTokenBO;
 import cn.congee.api.util.StandardBeanUtil;
 import cn.congee.api.util.StandardPageUtil;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,7 @@ import java.util.stream.Collectors;
  * Date: 2020/12/29
  * Time: 上午9:46
  **/
+@Slf4j
 @Service
 public class NoticeService {
 
@@ -44,16 +47,19 @@ public class NoticeService {
     private NoticeManage noticeManage;
 
     /**
-     * @author yandanyang
-     * @description 分页查询
-     * @date 2019-07-11 16:19:48
+     * 分页查询全部消息
+     *
+     * @param queryDTO
+     * @return
      */
     public ResponseDTO<PageResultDTO<NoticeVO>> queryByPage(NoticeQueryDTO queryDTO) {
+        log.info("分页查询全部消息接口入参为queryDTO=[{}]", JSON.toJSONString(queryDTO));
         queryDTO.setDeleted(JudgeEnum.NO.getValue());
         Page page = StandardPageUtil.convert2QueryPage(queryDTO);
         List<NoticeVO> dtoList = noticeDao.queryByPage(page, queryDTO);
         page.setRecords(dtoList);
         PageResultDTO<NoticeVO> pageResultDTO = StandardPageUtil.convert2PageResult(page);
+        log.info("分页查询全部消息接口出参为pageResultDTO=[{}]", JSON.toJSONString(pageResultDTO));
         return ResponseDTO.succData(pageResultDTO);
     }
 
@@ -65,6 +71,7 @@ public class NoticeService {
      * @return
      */
     public ResponseDTO<PageResultDTO<NoticeReceiveDTO>> queryReceiveByPage(NoticeReceiveQueryDTO queryDTO, RequestTokenBO requestToken) {
+        log.info("获取当前登录人的消息列表接口入参为queryDTO=[{}],requestToken=[{}]", JSON.toJSONString(queryDTO), JSON.toJSONString(requestToken));
         queryDTO.setEmployeeId(requestToken.getRequestUserId());
         queryDTO.setSendStatus(JudgeEnum.YES.getValue());
         Page page = StandardPageUtil.convert2QueryPage(queryDTO);
@@ -78,6 +85,7 @@ public class NoticeService {
         });
         page.setRecords(dtoList);
         PageResultDTO<NoticeReceiveDTO> pageResultDTO = StandardPageUtil.convert2PageResult(page);
+        log.info("获取当前登录人的消息列表接口出参为pageResultDTO=[{}]", JSON.toJSONString(pageResultDTO));
         return ResponseDTO.succData(pageResultDTO);
     }
 
@@ -89,19 +97,24 @@ public class NoticeService {
      * @return
      */
     public ResponseDTO<PageResultDTO<NoticeVO>> queryUnreadByPage(PageParamDTO queryDTO, RequestTokenBO requestToken) {
+        log.info("分页查询我的未读消息接口入参为queryDTO=[{}],requestToken=[{}]", JSON.toJSONString(queryDTO), JSON.toJSONString(requestToken));
         Page page = StandardPageUtil.convert2QueryPage(queryDTO);
         List<NoticeVO> dtoList = noticeDao.queryUnreadByPage(page, requestToken.getRequestUserId(), JudgeEnum.YES.getValue());
         page.setRecords(dtoList);
         PageResultDTO<NoticeVO> pageResultDTO = StandardPageUtil.convert2PageResult(page);
+        log.info("分页查询我的未读消息接口出参为pageResultDTO=[{}]", JSON.toJSONString(pageResultDTO));
         return ResponseDTO.succData(pageResultDTO);
     }
 
     /**
-     * @author yandanyang
-     * @description 添加
-     * @date 2019-07-11 16:19:48
+     * 添加消息
+     *
+     * @param addDTO
+     * @param requestToken
+     * @return
      */
     public ResponseDTO<String> add(NoticeAddDTO addDTO, RequestTokenBO requestToken) {
+        log.info("添加消息接口入参为addDTO=[{}],requestToken=[{}]", JSON.toJSONString(addDTO), JSON.toJSONString(requestToken));
         NoticeEntity entity = StandardBeanUtil.copy(addDTO, NoticeEntity.class);
         entity.setCreateTime(new Date());
         entity.setUpdateTime(new Date());
@@ -113,12 +126,14 @@ public class NoticeService {
     }
 
     /**
-     * @author yandanyang
-     * @description 编辑
-     * @date 2019-07-11 16:19:48
+     * 修改消息
+     *
+     * @param updateDTO
+     * @return
      */
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> update(NoticeUpdateDTO updateDTO) {
+        log.info("修改消息接口入参为updateDTO=[{}]", JSON.toJSONString(updateDTO));
         NoticeEntity entity = noticeDao.selectById(updateDTO.getId());
         if (entity == null) {
             return ResponseDTO.wrap(ResponseCodeConst.ERROR_PARAM, "此系统通知不存在");
@@ -131,11 +146,13 @@ public class NoticeService {
     }
 
     /**
-     * @author yandanyang
-     * @description 删除
-     * @date 2019-07-11 16:19:48
+     * 根据ID删除消息
+     *
+     * @param id
+     * @return
      */
     public ResponseDTO<String> delete(Long id) {
+        log.info("根据ID删除消息接口入参为id=[{}]", id);
         NoticeEntity entity = noticeDao.selectById(id);
         if (entity == null) {
             return ResponseDTO.wrap(ResponseCodeConst.ERROR_PARAM, "此系统通知不存在");
@@ -145,12 +162,15 @@ public class NoticeService {
     }
 
     /**
-     * @author yandanyang
-     * @description 根据ID查询
-     * @date 2019-07-11 16:19:48
+     * 根据ID查询消息详情
+     *
+     * @param id
+     * @return
      */
     public ResponseDTO<NoticeDetailVO> detail(Long id) {
+        log.info("根据ID查询消息详情接口入参为id=[{}]", id);
         NoticeDetailVO noticeDTO = noticeDao.detail(id);
+        log.info("根据ID查询消息详情接口出参为noticeDTO=[{}]", JSON.toJSONString(noticeDTO));
         return ResponseDTO.succData(noticeDTO);
     }
 
@@ -172,6 +192,7 @@ public class NoticeService {
      * @return
      */
     public ResponseDTO<NoticeDetailVO> send(Long id, RequestTokenBO requestToken) {
+        log.info("发送消息接口入参为id=[{}],requestToken=[{}]", id, JSON.toJSONString(requestToken));
         NoticeEntity entity = noticeDao.selectById(id);
         if (entity == null) {
             return ResponseDTO.wrap(ResponseCodeConst.ERROR_PARAM, "此系统通知不存在");
@@ -216,8 +237,9 @@ public class NoticeService {
      * @return
      */
     public ResponseDTO<NoticeDetailVO> read(Long id, RequestTokenBO requestToken) {
+        log.info("读取消息接口入参为id=[{}],requestToken=[{}]", id, JSON.toJSONString(requestToken));
         NoticeDetailVO noticeDTO = noticeDao.detail(id);
-
+        log.info("读取消息接口出参为noticeDTO=[{}]", JSON.toJSONString(noticeDTO));
         NoticeReceiveRecordEntity recordEntity = noticeReceiveRecordDao.selectByEmployeeAndNotice(requestToken.getRequestUserId(), id);
         if (recordEntity != null) {
             return ResponseDTO.succData(noticeDTO);

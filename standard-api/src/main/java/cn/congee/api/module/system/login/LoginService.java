@@ -28,6 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
@@ -134,6 +135,7 @@ public class LoginService {
      * @return 退出登陆是否成功，bool
      */
     public ResponseDTO<Boolean> logoutByToken(RequestTokenBO requestToken) {
+        log.info("退出登陆接口入参为requestToken=[{}]", JSON.toJSONString(requestToken));
         privilegeEmployeeService.removeCache(requestToken.getRequestUserId());
         return ResponseDTO.succ();
     }
@@ -143,7 +145,8 @@ public class LoginService {
      *
      * @return
      */
-    public ResponseDTO<KaptchaVO> verificationCode() {
+    public ResponseDTO<KaptchaVO> verificationCode(HttpHeaders httpHeaders) {
+        log.info("获取验证码接口入参为x-access-token=[{}]", JSON.toJSONString(httpHeaders.get("x-access-token")));
         KaptchaVO kaptchaVO = new KaptchaVO();
         String uuid = buildVerificationCodeRedisKey(UUID.randomUUID().toString());
         String kaptchaText = defaultKaptcha.createText();
@@ -170,6 +173,7 @@ public class LoginService {
         kaptchaVO.setUuid(uuid);
         kaptchaVO.setCode("data:image/png;base64," + base64Code);
         redisValueOperations.set(uuid, kaptchaText, 60L, TimeUnit.SECONDS);
+        log.info("获取验证码接口出参为kaptchaVO=[{}]", JSON.toJSONString(kaptchaVO));
         return ResponseDTO.succData(kaptchaVO);
     }
 
@@ -189,7 +193,14 @@ public class LoginService {
         return StandardBeanUtil.copyList(privilegeList, LoginPrivilegeDTO.class);
     }
 
+    /**
+     * 获取session
+     *
+     * @param requestUser
+     * @return
+     */
     public LoginDetailVO getSession(RequestTokenBO requestUser) {
+        log.info("获取session接口入参为requestUser=[{}]", JSON.toJSONString(requestUser));
         LoginDetailVO loginDTO = StandardBeanUtil.copy(requestUser.getEmployeeBO(), LoginDetailVO.class);
         List<PrivilegeEntity> privilegeEntityList = privilegeEmployeeService.getEmployeeAllPrivilege(requestUser.getRequestUserId());
         //======  开启缓存   ======
@@ -207,6 +218,7 @@ public class LoginService {
         //判断是否为超管
         Boolean isSuperman = privilegeEmployeeService.isSuperman(loginDTO.getId());
         loginDTO.setIsSuperMan(isSuperman);
+        log.info("获取session接口出参为loginDTO=[{}]", JSON.toJSONString(loginDTO));
         return loginDTO;
     }
 

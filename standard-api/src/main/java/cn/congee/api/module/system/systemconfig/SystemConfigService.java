@@ -82,12 +82,14 @@ public class SystemConfigService {
      * @return
      */
     public ResponseDTO<PageResultDTO<SystemConfigVO>> getSystemConfigPage(SystemConfigQueryDTO queryDTO) {
+        log.info("分页获取系统配置接口入参为queryDTO=[{}]", JSON.toJSONString(queryDTO));
         Page page = StandardPageUtil.convert2QueryPage(queryDTO);
         if(queryDTO.getKey() != null){
             queryDTO.setKey(queryDTO.getKey().toLowerCase());
         }
         List<SystemConfigEntity> entityList = systemConfigDao.selectSystemSettingList(page, queryDTO);
         PageResultDTO<SystemConfigVO> pageResultDTO = StandardPageUtil.convert2PageResult(page, entityList, SystemConfigVO.class);
+        log.info("分页获取系统配置接口出参为pageResultDTO=[{}]", JSON.toJSONString(pageResultDTO));
         return ResponseDTO.succData(pageResultDTO);
     }
 
@@ -98,6 +100,7 @@ public class SystemConfigService {
      * @return
      */
     public ResponseDTO<SystemConfigVO> selectByKey(String configKey) {
+        log.info("根据参数key获得一条数据（数据库）接口入参为configKey=[{}]", configKey);
         if(configKey != null){
             configKey = configKey.toLowerCase();
         }
@@ -106,6 +109,7 @@ public class SystemConfigService {
             return ResponseDTO.wrap(SystemConfigResponseCodeConst.NOT_EXIST);
         }
         SystemConfigVO configDTO = StandardBeanUtil.copy(entity, SystemConfigVO.class);
+        log.info("根据参数key获得一条数据（数据库）接口出参为configDTO=[{}]", JSON.toJSONString(configDTO));
         return ResponseDTO.succData(configDTO);
     }
 
@@ -149,6 +153,7 @@ public class SystemConfigService {
      * @return
      */
     public ResponseDTO<String> addSystemConfig(SystemConfigAddDTO configAddDTO) {
+        log.info("添加系统配置接口入参为configAddDTO=[{}]", JSON.toJSONString(configAddDTO));
         configAddDTO.setConfigKey(configAddDTO.getConfigKey().toLowerCase());
         SystemConfigEntity entity = systemConfigDao.getByKey(configAddDTO.getConfigKey());
         if (entity != null) {
@@ -174,6 +179,7 @@ public class SystemConfigService {
      * @return
      */
     public ResponseDTO<String> updateSystemConfig(SystemConfigUpdateDTO updateDTO) {
+        log.info("更新系统配置接口入参为updateDTO=[{}]", JSON.toJSONString(updateDTO));
         updateDTO.setConfigKey(updateDTO.getConfigKey().toLowerCase());
         SystemConfigEntity entity = systemConfigDao.selectById(updateDTO.getId());
         //系统配置不存在
@@ -236,12 +242,13 @@ public class SystemConfigService {
      * @return
      */
     public ResponseDTO<List<SystemConfigVO>> getListByGroup(String group) {
-
+        log.info("根据分组名称 获取获取系统设置接口入参为group=[{}]", group);
         List<SystemConfigEntity> entityList = systemConfigDao.getListByGroup(group);
         if (CollectionUtils.isEmpty(entityList)) {
             return ResponseDTO.succData(Lists.newArrayList());
         }
         List<SystemConfigVO> systemConfigList = StandardBeanUtil.copyList(entityList, SystemConfigVO.class);
+        log.info("根据分组名称 获取获取系统设置接口出参为systemConfigList=[{}]", JSON.toJSONString(systemConfigList));
         return ResponseDTO.succData(systemConfigList);
     }
 

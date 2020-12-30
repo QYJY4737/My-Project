@@ -38,14 +38,14 @@ public class StandardReloadController {
         return standardReloadService.listAllReloadItem();
     }
 
-    @ApiOperation(value = "获取reload result", notes = "获取reload result")
+    @ApiOperation(value = "获取reload-result项", notes = "获取reload-result项")
     @GetMapping("/result/{tag}")
     @NoValidPrivilege
     public ResponseDTO<List<ReloadResultVO>> queryReloadResult(@PathVariable("tag") String tag) {
         return standardReloadService.listReloadItemResult(tag);
     }
 
-    @ApiOperation("通过tag更新标识")
+    @ApiOperation(value = "通过tag更新标识", notes = "通过tag更新标识")
     @PostMapping("/update")
     @NoValidPrivilege
     public ResponseDTO<String> updateByTag(@RequestBody @Valid ReloadItemUpdateDTO updateDTO) {

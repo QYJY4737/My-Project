@@ -30,7 +30,7 @@ public class HeartBeatController {
     private HeartBeatService heartBeatService;
 
     @PostMapping("/query")
-    @ApiOperation("查询心跳记录 @author wgb")
+    @ApiOperation(value = "查询心跳记录", notes = "查询心跳记录")
     public ResponseDTO<PageResultDTO<HeartBeatRecordVO>> query(@RequestBody @Valid PageParamDTO pageParamDTO){
         return heartBeatService.pageQuery(pageParamDTO);
     }

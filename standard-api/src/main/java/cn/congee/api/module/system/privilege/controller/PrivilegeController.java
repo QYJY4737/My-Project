@@ -36,34 +36,31 @@ public class PrivilegeController {
         return privilegeService.getPrivilegeUrlDTOList();
     }
 
-    @ApiOperation(value = "菜单批量保存")
+    @ApiOperation(value = "菜单批量保存", notes = "菜单批量保存")
     @PostMapping("/menu/batchSaveMenu")
     public ResponseDTO<String> menuBatchSave(@Valid @RequestBody ValidateList<PrivilegeMenuDTO> menuList) {
         return privilegeService.menuBatchSave(menuList);
     }
 
-
-    @ApiOperation(value = "查询所有菜单项")
+    @ApiOperation(value = "查询所有菜单项", notes = "查询所有菜单项")
     @PostMapping("/menu/queryAll")
     public ResponseDTO<List<PrivilegeMenuVO>> queryAll() {
         return privilegeService.menuQueryAll();
     }
 
-
-    @ApiOperation(value = "保存更新功能点")
+    @ApiOperation(value = "保存更新功能点", notes = "保存更新功能点")
     @PostMapping("/function/saveOrUpdate")
     public ResponseDTO<String> functionSaveOrUpdate(@Valid @RequestBody PrivilegeFunctionDTO privilegeFunctionDTO) {
         return privilegeService.functionSaveOrUpdate(privilegeFunctionDTO);
     }
 
-    @ApiOperation(value = "批量保存功能点")
+    @ApiOperation(value = "批量保存功能点", notes = "批量保存功能点")
     @PostMapping("/function/batchSave")
     public ResponseDTO<String>  batchSaveFunctionList(@Valid @RequestBody ValidateList<PrivilegeFunctionDTO> functionList) {
         return privilegeService.batchSaveFunctionList(functionList);
     }
 
-
-    @ApiOperation(value = "查询菜单功能点", notes = "更新")
+    @ApiOperation(value = "查询菜单功能点", notes = "查询菜单功能点")
     @PostMapping("/function/query/{menuKey}")
     public ResponseDTO<List<PrivilegeFunctionVO>> functionQuery(@PathVariable String menuKey) {
         return privilegeService.functionQuery(menuKey);

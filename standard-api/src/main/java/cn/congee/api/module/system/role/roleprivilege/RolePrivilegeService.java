@@ -12,7 +12,9 @@ import cn.congee.api.module.system.role.roleprivilege.domain.dto.RolePrivilegeSi
 import cn.congee.api.module.system.role.roleprivilege.domain.dto.RolePrivilegeTreeVO;
 import cn.congee.api.module.system.role.roleprivilege.domain.entity.RolePrivilegeEntity;
 import cn.congee.api.util.StandardBeanUtil;
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,7 @@ import java.util.stream.Collectors;
  * Date: 2020/12/29
  * Time: 下午3:07
  **/
+@Slf4j
 @Service
 public class RolePrivilegeService {
 
@@ -51,6 +54,7 @@ public class RolePrivilegeService {
      * @return ResponseDTO
      */
     public ResponseDTO<String> updateRolePrivilege(RolePrivilegeDTO updateDTO) {
+        log.info("更新角色权限接口入参为updateDTO=[{}]", JSON.toJSONString(updateDTO));
         Long roleId = updateDTO.getRoleId();
         RoleEntity roleEntity = roleDao.selectById(roleId);
         if (null == roleEntity) {
@@ -70,7 +74,14 @@ public class RolePrivilegeService {
         return ResponseDTO.succ();
     }
 
+    /**
+     * 获取角色可选的功能权限
+     *
+     * @param roleId
+     * @return
+     */
     public ResponseDTO<RolePrivilegeTreeVO> listPrivilegeByRoleId(Long roleId) {
+        log.info("获取角色可选的功能权限接口入参为roleId=[{}]", roleId);
         RolePrivilegeTreeVO rolePrivilegeTreeDTO = new RolePrivilegeTreeVO();
         rolePrivilegeTreeDTO.setRoleId(roleId);
 
@@ -87,6 +98,7 @@ public class RolePrivilegeService {
         List<String> privilegeKeyList = rolePrivilegeEntityList.stream().map(e -> e.getKey()).collect(Collectors.toList());
         rolePrivilegeTreeDTO.setPrivilege(privilegeList);
         rolePrivilegeTreeDTO.setSelectedKey(privilegeKeyList);
+        log.info("获取角色可选的功能权限接口出参为rolePrivilegeTreeDTO=[{}]", JSON.toJSONString(rolePrivilegeTreeDTO));
         return ResponseDTO.succData(rolePrivilegeTreeDTO);
     }
 

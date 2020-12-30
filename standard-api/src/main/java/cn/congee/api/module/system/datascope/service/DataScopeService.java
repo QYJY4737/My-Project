@@ -8,7 +8,9 @@ import cn.congee.api.module.system.datascope.constant.DataScopeViewTypeEnum;
 import cn.congee.api.module.system.datascope.domain.dto.*;
 import cn.congee.api.module.system.datascope.domain.entity.DataScopeRoleEntity;
 import cn.congee.api.util.StandardBeanUtil;
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +24,7 @@ import java.util.List;
  * Date: 2020/12/29
  * Time: 下午2:13
  **/
+@Slf4j
 @Service
 public class DataScopeService {
 
@@ -34,12 +37,14 @@ public class DataScopeService {
      * @return
      */
     public ResponseDTO<List<DataScopeAndViewTypeVO>> dataScopeList() {
+        log.info("获取所有可以进行数据范围配置的信息接口入参为空");
         List<DataScopeDTO> dataScopeList = this.getDataScopeType();
         List<DataScopeAndViewTypeVO> dataScopeAndTypeList = StandardBeanUtil.copyList(dataScopeList, DataScopeAndViewTypeVO.class);
         List<DataScopeViewTypeVO> typeList = this.getViewType();
         dataScopeAndTypeList.forEach(e -> {
             e.setViewTypeList(typeList);
         });
+        log.info("获取所有可以进行数据范围配置的信息接口出参为dataScopeAndTypeList=[{}]", JSON.toJSONString(dataScopeAndTypeList));
         return ResponseDTO.succData(dataScopeAndTypeList);
     }
 
@@ -82,12 +87,13 @@ public class DataScopeService {
      * @return
      */
     public ResponseDTO<List<DataScopeSelectVO>> dataScopeListByRole(Long roleId) {
-
+        log.info("获取某个角色的数据范围设置信息接口入参为roleId=[{}]", roleId);
         List<DataScopeRoleEntity> dataScopeRoleEntityList = dataScopeRoleDao.listByRoleId(roleId);
         if (CollectionUtils.isEmpty(dataScopeRoleEntityList)) {
             return ResponseDTO.succData(Lists.newArrayList());
         }
         List<DataScopeSelectVO> dataScopeSelects = StandardBeanUtil.copyList(dataScopeRoleEntityList, DataScopeSelectVO.class);
+        log.info("获取某个角色的数据范围设置信息接口出参为dataScopeSelects=[{}]", JSON.toJSONString(dataScopeSelects));
         return ResponseDTO.succData(dataScopeSelects);
     }
 
@@ -99,6 +105,7 @@ public class DataScopeService {
      */
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<String> dataScopeBatchSet(DataScopeBatchSetRoleDTO batchSetRoleDTO) {
+        log.info("批量设置某个角色的数据范围设置信息接口入参为batchSetRoleDTO=[{}]", JSON.toJSONString(batchSetRoleDTO));
         List<DataScopeBatchSetDTO> batchSetList = batchSetRoleDTO.getBatchSetList();
         if (CollectionUtils.isEmpty(batchSetList)) {
             return ResponseDTO.wrap(ResponseCodeConst.ERROR_PARAM, "缺少配置信息");
