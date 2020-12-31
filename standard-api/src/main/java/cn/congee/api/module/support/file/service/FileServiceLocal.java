@@ -7,6 +7,7 @@ import cn.congee.api.module.support.file.domain.vo.UploadVO;
 import cn.congee.api.module.system.systemconfig.SystemConfigDao;
 import cn.congee.api.module.system.systemconfig.constant.SystemConfigEnum;
 import cn.congee.api.module.system.systemconfig.domain.entity.SystemConfigEntity;
+import com.qiniu.http.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by wgb
@@ -90,6 +92,24 @@ public class FileServiceLocal implements IFileService {
     }
 
     @Override
+    public ResponseDTO<UploadVO> uploadByFile(MultipartFile file) {
+        //TODO
+        return null;
+    }
+
+    @Override
+    public ResponseDTO<UploadVO> uploadByStream(InputStream stream) {
+        //TODO
+        return null;
+    }
+
+    @Override
+    public ResponseDTO<Response> deleteByKey(String key) {
+        //TODO
+        return null;
+    }
+
+    @Override
     public ResponseDTO<String> getFileUrl(String path) {
         String urlParent = this.localUrlPrefix();
         if (urlParent == null) {
@@ -114,6 +134,24 @@ public class FileServiceLocal implements IFileService {
         // 创建文件
         File file = new File(url);
         return this.downloadMethod(file, request);
+    }
+
+    @Override
+    public String generateFileName(String originalFileName) {
+        //TODO
+        return null;
+    }
+
+    @Override
+    public String getContentType(String fileExt) {
+        //TODO
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<byte[]> downloadMethod(File file, HttpServletRequest request) {
+        //TODO
+        return null;
     }
 
 }

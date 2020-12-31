@@ -11,6 +11,7 @@ import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.OSSObject;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.PutObjectRequest;
+import com.qiniu.http.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +87,24 @@ public class FileServiceAliYun implements IFileService {
     }
 
     @Override
+    public ResponseDTO<UploadVO> uploadByFile(MultipartFile file) {
+        //TODO
+        return null;
+    }
+
+    @Override
+    public ResponseDTO<UploadVO> uploadByStream(InputStream stream) {
+        //TODO
+        return null;
+    }
+
+    @Override
+    public ResponseDTO<Response> deleteByKey(String key) {
+        //TODO
+        return null;
+    }
+
+    @Override
     public ResponseDTO<String> getFileUrl(String path) {
         OSSConfig ossConfig = systemConfigService.selectByKey2Obj(SystemConfigEnum.Key.ALI_OSS.name(), OSSConfig.class);
         try {
@@ -121,6 +140,24 @@ public class FileServiceAliYun implements IFileService {
             throw new RuntimeException("文件不存在");
         }
         return this.downloadMethod(file, request);
+    }
+
+    @Override
+    public String generateFileName(String originalFileName) {
+        //TODO
+        return null;
+    }
+
+    @Override
+    public String getContentType(String fileExt) {
+        //TODO
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<byte[]> downloadMethod(File file, HttpServletRequest request) {
+        //TODO
+        return null;
     }
 
     /**
