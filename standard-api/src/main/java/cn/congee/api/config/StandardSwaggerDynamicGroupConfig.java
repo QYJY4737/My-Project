@@ -205,7 +205,7 @@ public class StandardSwaggerDynamicGroupConfig implements EnvironmentAware, Bean
                 .description(description)
                 .version(version)
                 .license("Apache License Version 2.0")
-                .contact(new Contact("1024创新实验室", "http://www.1024lab.net", ""))
+                .contact(new Contact("wgb", "http://www.glonk.cn", ""))
                 .termsOfServiceUrl(serviceUrl)
                 .build();
     }
