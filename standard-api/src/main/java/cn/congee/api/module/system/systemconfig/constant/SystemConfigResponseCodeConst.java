@@ -15,6 +15,7 @@ public class SystemConfigResponseCodeConst extends ResponseCodeConst {
      * 配置参数已存在 10201
      */
     public static final SystemConfigResponseCodeConst ALREADY_EXIST = new SystemConfigResponseCodeConst(5001, "配置参数已存在");
+
     /**
      * 配置参数不存在 10203
      */
