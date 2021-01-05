@@ -15,8 +15,14 @@ import lombok.Data;
 @TableName(value = "t_role_employee")
 public class RoleEmployeeEntity extends BaseEntity {
 
+    /**
+     * 角色id
+     */
     private Long roleId;
 
+    /**
+     * 员工id
+     */
     private Long employeeId;
 
 }
