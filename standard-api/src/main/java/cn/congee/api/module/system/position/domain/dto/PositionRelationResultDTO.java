@@ -1,5 +1,6 @@
 package cn.congee.api.module.system.position.domain.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
@@ -14,29 +15,19 @@ import java.util.Date;
 @Data
 public class PositionRelationResultDTO {
 
-    /**
-     * 岗位ID
-     */
+    @ApiModelProperty("岗位ID")
     private Long positionId;
 
-    /**
-     * 员工ID
-     */
+    @ApiModelProperty("员工ID")
     private Long employeeId;
 
-    /**
-     * 岗位名称
-     */
+    @ApiModelProperty("岗位名称")
     private String positionName;
 
-    /**
-     * 更新时间
-     */
+    @ApiModelProperty("更新时间")
     private Date updateTime;
 
-    /**
-     * 创建时间
-     */
+    @ApiModelProperty("创建时间")
     private Date createTime;
 
 }

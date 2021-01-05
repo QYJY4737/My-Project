@@ -29,7 +29,7 @@ public interface PositionDao extends BaseMapper<PositionEntity> {
      * @param queryDTO
      * @return
      */
-    List<PositionEntity> selectByPage(Page page, @Param("queryDTO") PositionQueryDTO queryDTO);
+    List<PositionEntity> selectByPage(Page page, @Param(value = "queryDTO") PositionQueryDTO queryDTO);
 
     /**
      * 查询岗位与人员关系
@@ -44,7 +44,7 @@ public interface PositionDao extends BaseMapper<PositionEntity> {
      * @param employeeIdList
      * @return
      */
-    List<PositionRelationResultDTO> selectEmployeesRelation(@Param("employeeIdList") List<Long> employeeIdList);
+    List<PositionRelationResultDTO> selectEmployeesRelation(@Param(value = "employeeIdList") List<Long> employeeIdList);
 
     /**
      * 批量添加岗位 人员 关联关系
@@ -52,7 +52,7 @@ public interface PositionDao extends BaseMapper<PositionEntity> {
      * @param positionRelationAddDTO
      * @return
      */
-    Integer insertBatchRelation(@Param("batchDTO") PositionRelationAddDTO positionRelationAddDTO);
+    Integer insertBatchRelation(@Param(value = "batchDTO") PositionRelationAddDTO positionRelationAddDTO);
 
     /**
      * 删除指定人员的 岗位关联关系
@@ -60,6 +60,6 @@ public interface PositionDao extends BaseMapper<PositionEntity> {
      * @param employeeId
      * @return
      */
-    Integer deleteRelationByEmployeeId(@Param("employeeId") Long employeeId);
+    Integer deleteRelationByEmployeeId(@Param(value = "employeeId") Long employeeId);
 
 }

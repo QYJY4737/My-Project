@@ -49,13 +49,13 @@ public class PositionController {
 
     @ApiOperation(value = "根据ID查询岗位", notes = "根据ID查询岗位")
     @GetMapping("/queryById/{id}")
-    public ResponseDTO<PositionResultVO> queryJobById(@PathVariable Long id) {
+    public ResponseDTO<PositionResultVO> queryJobById(@PathVariable(value = "id") Long id) {
         return positionService.queryPositionById(id);
     }
 
     @ApiOperation(value = "根据ID删除岗位", notes = "根据ID删除岗位")
     @GetMapping("/remove/{id}")
-    public ResponseDTO<String> removeJob(@PathVariable Long id) {
+    public ResponseDTO<String> removeJob(@PathVariable(value = "id") Long id) {
         return positionService.removePosition(id);
     }
 
