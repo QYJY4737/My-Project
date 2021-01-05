@@ -15,9 +15,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class RoleUpdateDTO extends RoleAddDTO {
 
-    /**
-     * 角色id
-     */
     @ApiModelProperty("角色id")
     @NotNull(message = "角色id不能为空")
     protected Long id;
