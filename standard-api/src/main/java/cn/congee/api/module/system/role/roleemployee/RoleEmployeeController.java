@@ -42,7 +42,7 @@ public class RoleEmployeeController {
 
     @ApiOperation(value = "根据角色id获取角色员工列表(无分页)", notes = "根据角色id获取角色成员-员工列表")
     @GetMapping("/listAllEmployee/{roleId}")
-    public ResponseDTO<List<EmployeeVO>> listAllEmployeeRoleId(@PathVariable Long roleId) {
+    public ResponseDTO<List<EmployeeVO>> listAllEmployeeRoleId(@PathVariable(value = "roleId") Long roleId) {
         return roleEmployeeService.getAllEmployeeByRoleId(roleId);
     }
 
@@ -50,7 +50,7 @@ public class RoleEmployeeController {
     @ApiImplicitParams({@ApiImplicitParam(name = "employeeId", value = "员工id", paramType = "query", required = true), @ApiImplicitParam(name = "roleId", value = "角色id", paramType = "query",
             required = true)})
     @GetMapping("/removeEmployee")
-    public ResponseDTO<String> removeEmployee(Long employeeId, Long roleId) {
+    public ResponseDTO<String> removeEmployee(@RequestParam(value = "employeeId") Long employeeId, @RequestParam(value = "roleId") Long roleId) {
         return roleEmployeeService.removeEmployeeRole(employeeId, roleId);
     }
 
@@ -69,7 +69,7 @@ public class RoleEmployeeController {
     @ApiOperation(value = "通过员工id获取所有角色以及员工具有的角色", notes = "通过员工id获取所有角色以及员工具有的角色")
     @GetMapping("/getRoles/{employeeId}")
     @ApiImplicitParams({@ApiImplicitParam(name = "employeeId", value = "员工id", paramType = "path", required = true)})
-    public ResponseDTO<List<RoleSelectedVO>> getRoleByEmployeeId(@PathVariable Long employeeId) {
+    public ResponseDTO<List<RoleSelectedVO>> getRoleByEmployeeId(@PathVariable(value = "employeeId") Long employeeId) {
         return roleEmployeeService.getRolesByEmployeeId(employeeId);
     }
 
