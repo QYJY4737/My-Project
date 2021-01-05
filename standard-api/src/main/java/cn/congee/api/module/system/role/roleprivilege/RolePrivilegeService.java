@@ -102,6 +102,12 @@ public class RolePrivilegeService {
         return ResponseDTO.succData(rolePrivilegeTreeDTO);
     }
 
+    /**
+     * 构造权限树
+     *
+     * @param privilegeEntityList
+     * @return
+     */
     private List<RolePrivilegeSimpleDTO> buildPrivilegeTree(List<PrivilegeEntity> privilegeEntityList) {
         List<RolePrivilegeSimpleDTO> privilegeTree = Lists.newArrayList();
         List<PrivilegeEntity> rootPrivilege = privilegeEntityList.stream().filter(e -> e.getParentKey() == null).collect(Collectors.toList());
