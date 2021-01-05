@@ -21,12 +21,12 @@ public interface PrivilegeDao extends BaseMapper<PrivilegeEntity> {
      * 根据权限key删除
      * @param keyList
      */
-    void delByKeyList(@Param("keyList") List<String> keyList);
+    void delByKeyList(@Param(value = "keyList") List<String> keyList);
     /**
      * 根据权限parentkey删除
      * @param keyList
      */
-    void delByParentKeyList(@Param("keyList") List<String> keyList);
+    void delByParentKeyList(@Param(value = "keyList") List<String> keyList);
 
     /**
      * 批量保存
@@ -38,42 +38,42 @@ public interface PrivilegeDao extends BaseMapper<PrivilegeEntity> {
      * 批量更新
      * @param privilegeList
      */
-    void batchUpdate(@Param("updateList") List<PrivilegeEntity> privilegeList);
+    void batchUpdate(@Param(value = "updateList") List<PrivilegeEntity> privilegeList);
 
     /**
      * 根据父节点key查询
      * @param parentKey
      * @return
      */
-    List<PrivilegeEntity> selectByParentKey(@Param("parentKey") String parentKey);
+    List<PrivilegeEntity> selectByParentKey(@Param(value = "parentKey") String parentKey);
 
     /**
      * 根据父节点key查询
      * @param keyList
      * @return
      */
-    List<PrivilegeEntity> selectByKeyList(@Param("keyList") List<String> keyList);
+    List<PrivilegeEntity> selectByKeyList(@Param(value = "keyList") List<String> keyList);
 
     /**
      * 根据权限key查询
      * @param key
      * @return
      */
-    PrivilegeEntity selectByKey(@Param("key") String key);
+    PrivilegeEntity selectByKey(@Param(value = "key") String key);
 
     /**
      * 根据类型查询
      * @param type
      * @return
      */
-    List<PrivilegeEntity> selectByExcludeType(@Param("type") Integer type);
+    List<PrivilegeEntity> selectByExcludeType(@Param(value = "type") Integer type);
 
     /**
      * 根据类型查询
      * @param type
      * @return
      */
-    List<PrivilegeEntity> selectByType(@Param("type") Integer type);
+    List<PrivilegeEntity> selectByType(@Param(value = "type") Integer type);
 
     /**
      * 查询所有权限

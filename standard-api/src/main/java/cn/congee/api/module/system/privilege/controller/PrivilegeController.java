@@ -62,7 +62,7 @@ public class PrivilegeController {
 
     @ApiOperation(value = "查询菜单功能点", notes = "查询菜单功能点")
     @PostMapping("/function/query/{menuKey}")
-    public ResponseDTO<List<PrivilegeFunctionVO>> functionQuery(@PathVariable String menuKey) {
+    public ResponseDTO<List<PrivilegeFunctionVO>> functionQuery(@PathVariable(value = "menuKey") String menuKey) {
         return privilegeService.functionQuery(menuKey);
     }
 

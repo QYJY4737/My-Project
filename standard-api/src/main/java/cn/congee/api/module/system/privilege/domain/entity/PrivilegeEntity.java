@@ -34,14 +34,15 @@ public class PrivilegeEntity extends BaseEntity implements Serializable {
     @TableField(value = "`key`")
     private String key;
 
-
+    /**
+     * url列表
+     */
     private String url;
 
     /**
      * 排序
      */
     private Integer sort;
-
 
     /**
      * 父级key

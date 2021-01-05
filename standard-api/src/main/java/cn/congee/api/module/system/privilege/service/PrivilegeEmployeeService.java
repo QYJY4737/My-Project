@@ -38,6 +38,7 @@ public class PrivilegeEmployeeService {
      * 后台用户权限缓存 <id,<controllerName,methodName></>></>
      */
     private ConcurrentMap<Long, Map<String, List<String>>> employeePrivileges = new ConcurrentLinkedHashMap.Builder<Long, Map<String, List<String>>>().maximumWeightedCapacity(1000).build();
+
     private ConcurrentMap<Long, List<PrivilegeEntity>> employeePrivilegeListMap = new ConcurrentLinkedHashMap.Builder<Long, List<PrivilegeEntity>>().maximumWeightedCapacity(1000).build();
 
     @Autowired

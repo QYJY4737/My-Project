@@ -24,6 +24,7 @@ public enum PrivilegeTypeEnum implements BaseEnum {
         this.value = value;
         this.desc = desc;
     }
+
     @Override
     public Integer getValue() {
         return this.value;

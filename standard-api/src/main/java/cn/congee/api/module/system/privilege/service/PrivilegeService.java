@@ -140,7 +140,6 @@ public class PrivilegeService {
             menuEntity.setType(menuDTO.getType());
             menuEntity.setSort(menuDTO.getSort());
         }
-
     }
 
     /**
