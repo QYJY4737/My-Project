@@ -15,6 +15,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface RoleDao extends BaseMapper<RoleEntity> {
 
-    RoleEntity getByRoleName(@Param("roleName") String name);
+    RoleEntity getByRoleName(@Param(value = "roleName") String name);
 
 }
