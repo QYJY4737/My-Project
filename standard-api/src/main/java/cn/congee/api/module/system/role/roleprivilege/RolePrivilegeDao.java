@@ -22,13 +22,13 @@ public interface RolePrivilegeDao extends BaseMapper<RolePrivilegeEntity> {
      * 根据角色id删除
      * @param roleId
      */
-    void deleteByRoleId(@Param("roleId")Long roleId);
+    void deleteByRoleId(@Param(value = "roleId")Long roleId);
 
     /**
      * 删除权限所关联的角色信息
      * @param privilegeKeyList
      */
-    void deleteByPrivilegeKey(@Param("privilegeKeyList") List<String> privilegeKeyList);
+    void deleteByPrivilegeKey(@Param(value = "privilegeKeyList") List<String> privilegeKeyList);
 
 
     /**
@@ -42,13 +42,13 @@ public interface RolePrivilegeDao extends BaseMapper<RolePrivilegeEntity> {
      * @param roleIds
      * @return
      */
-    List<PrivilegeEntity> listByRoleIds(@Param("roleIds")List<Long> roleIds, @Param("normalStatus")Integer normalStatus);
+    List<PrivilegeEntity> listByRoleIds(@Param(value = "roleIds")List<Long> roleIds, @Param(value = "normalStatus")Integer normalStatus);
 
     /**
      * 查询某个角色的权限
      * @param roleId
      * @return
      */
-    List<PrivilegeEntity> listByRoleId(@Param("roleId")Long roleId);
+    List<PrivilegeEntity> listByRoleId(@Param(value = "roleId")Long roleId);
 
 }
