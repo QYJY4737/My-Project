@@ -15,8 +15,14 @@ import lombok.Data;
 @TableName(value = "t_role")
 public class RoleEntity extends BaseEntity {
 
+    /**
+     * 角色名称
+     */
     private String roleName;
 
+    /**
+     * 角色备注
+     */
     private String remark;
 
 }
