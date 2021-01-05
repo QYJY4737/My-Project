@@ -13,31 +13,40 @@ import java.util.Optional;
 public class SystemConfigEnum {
 
     public enum Group {
+
         BACK,
+
         GIT_LOG
+
     }
 
     public enum Key {
+
         /**
          * 超管id
          */
         EMPLOYEE_SUPERMAN(SystemConfigDataType.TEXT),
+
         /**
          * 阿里云OSS配置项
          */
         ALI_OSS(SystemConfigDataType.JSON),
+
         /**
          * 七牛云OSS配置项
          */
         QI_NIU_OSS(SystemConfigDataType.JSON),
+
         /**
          * 本地文件上传url前缀
          */
         LOCAL_UPLOAD_URL_PREFIX(SystemConfigDataType.URL),
+
         /**
          * 邮件配置
          */
         EMAIL_CONFIG(SystemConfigDataType.JSON),
+
         /**
          * git-log 插件
          */
@@ -48,7 +57,6 @@ public class SystemConfigEnum {
         Key(SystemConfigDataType dataType) {
             this.dataType = dataType;
         }
-
 
         public SystemConfigDataType getDataType() {
             return dataType;
