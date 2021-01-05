@@ -50,13 +50,13 @@ public class SystemConfigController {
 
     @ApiOperation(value = "根据分组查询所有系统配置", notes = "根据分组查询所有系统配置")
     @GetMapping("/getListByGroup")
-    public ResponseDTO<List<SystemConfigVO>> getListByGroup(String group) {
+    public ResponseDTO<List<SystemConfigVO>> getListByGroup(@RequestParam(value = "group") String group) {
         return systemConfigService.getListByGroup(group);
     }
 
     @ApiOperation(value = "通过key获取对应的信息", notes = "通过key获取对应的信息")
     @GetMapping("/selectByKey")
-    public ResponseDTO<SystemConfigVO> selectByKey(String configKey) {
+    public ResponseDTO<SystemConfigVO> selectByKey(@RequestParam(value = "configKey") String configKey) {
         return systemConfigService.selectByKey(configKey);
     }
 
