@@ -1,6 +1,7 @@
 package cn.congee.api.module.system.login.domain;
 
 import cn.congee.api.module.system.employee.domain.dto.EmployeeDTO;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -11,14 +12,10 @@ import lombok.Data;
 @Data
 public class LoginCacheDTO {
 
-    /**
-     * 基本信息
-     */
+    @ApiModelProperty("基本信息")
     private EmployeeDTO employeeDTO;
 
-    /**
-     * 过期时间
-     */
+    @ApiModelProperty("过期时间")
     private Long expireTime;
 
 }

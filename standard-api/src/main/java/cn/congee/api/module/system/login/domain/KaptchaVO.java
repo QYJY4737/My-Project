@@ -1,5 +1,6 @@
 package cn.congee.api.module.system.login.domain;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -10,14 +11,10 @@ import lombok.Data;
 @Data
 public class KaptchaVO {
 
-    /**
-     *  验证码UUID
-     */
+    @ApiModelProperty("验证码UUID")
     private String uuid;
 
-    /**
-     * base64 验证码
-     */
+    @ApiModelProperty("base64 验证码")
     private String code;
 
 }

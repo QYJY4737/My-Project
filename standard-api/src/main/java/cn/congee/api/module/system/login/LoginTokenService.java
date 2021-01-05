@@ -32,6 +32,7 @@ public class LoginTokenService {
      * 过期时间一天
      */
     private static final int EXPIRE_SECONDS = 1 * 24 * 3600;
+
     /**
      * jwt加密字段
      */
@@ -42,7 +43,6 @@ public class LoginTokenService {
 
     @Autowired
     private EmployeeService employeeService;
-
 
     /**
      * 功能描述: 生成JWT TOKEN
