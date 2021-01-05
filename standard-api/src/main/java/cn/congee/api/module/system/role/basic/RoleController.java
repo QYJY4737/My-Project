@@ -38,7 +38,7 @@ public class RoleController {
 
     @ApiOperation(value = "删除角色", notes = "根据id删除角色")
     @GetMapping("/delete/{roleId}")
-    public ResponseDTO<String> deleteRole(@PathVariable("roleId") Long roleId) {
+    public ResponseDTO<String> deleteRole(@PathVariable(value = "roleId") Long roleId) {
         return roleService.deleteRole(roleId);
     }
 
@@ -50,7 +50,7 @@ public class RoleController {
 
     @ApiOperation(value = "获取角色数据", notes = "根据id获取角色数据")
     @GetMapping("/get/{roleId}")
-    public ResponseDTO<RoleVO> getRole(@PathVariable("roleId") Long roleId) {
+    public ResponseDTO<RoleVO> getRole(@PathVariable(value = "roleId") Long roleId) {
         return roleService.getRoleById(roleId);
     }
 
