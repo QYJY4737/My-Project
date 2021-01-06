@@ -6,6 +6,8 @@ import cn.congee.api.common.domain.PageResultDTO;
 import cn.congee.api.common.domain.ResponseDTO;
 import cn.congee.api.constant.SwaggerTagConst;
 import cn.congee.api.module.support.quartz.domain.dto.*;
+import cn.congee.api.module.support.quartz.domain.vo.QuartzTaskLogVO;
+import cn.congee.api.module.support.quartz.domain.vo.QuartzTaskVO;
 import cn.congee.api.module.support.quartz.service.QuartzTaskService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -50,25 +52,25 @@ public class QuartzController {
 
     @GetMapping("/task/run/{taskId}")
     @ApiOperation(value = "立即运行某个任务", notes = "立即运行某个任务")
-    public ResponseDTO<String> runTask(@PathVariable("taskId") Long taskId)throws Exception{
+    public ResponseDTO<String> runTask(@PathVariable(value = "taskId") Long taskId)throws Exception{
         return quartzTaskService.runTask(taskId);
     }
 
     @GetMapping("/task/pause/{taskId}")
     @ApiOperation(value = "暂停运行某个任务", notes = "暂停运行某个任务")
-    public ResponseDTO<String> pauseTask(@PathVariable("taskId")Long taskId)throws Exception{
+    public ResponseDTO<String> pauseTask(@PathVariable(value = "taskId") Long taskId)throws Exception{
         return quartzTaskService.pauseTask(taskId);
     }
 
     @GetMapping("/task/resume/{taskId}")
     @ApiOperation(value = "恢复运行某个任务", notes = "恢复运行某个任务")
-    public ResponseDTO<String> resumeTask(@PathVariable("taskId")Long taskId)throws Exception{
+    public ResponseDTO<String> resumeTask(@PathVariable(value = "taskId") Long taskId)throws Exception{
         return quartzTaskService.resumeTask(taskId);
     }
 
     @GetMapping("/task/delete/{taskId}")
     @ApiOperation(value = "删除某个任务", notes = "删除某个任务")
-    public ResponseDTO<String> deleteTask(@PathVariable("taskId")Long taskId)throws Exception{
+    public ResponseDTO<String> deleteTask(@PathVariable(value = "taskId") Long taskId)throws Exception{
         return quartzTaskService.deleteTask(taskId);
     }
 
