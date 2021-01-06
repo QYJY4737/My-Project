@@ -37,7 +37,7 @@ public class UserLoginLogController {
 
     @ApiOperation(value = "根据id删除用户登录日志", notes = "根据id删除用户登录日志")
     @GetMapping("/delete/{id}")
-    public ResponseDTO<String> delete(@PathVariable("id") Long id) {
+    public ResponseDTO<String> delete(@PathVariable(value = "id") Long id) {
         return userLoginLogService.delete(id);
     }
 
