@@ -22,27 +22,27 @@ public interface DataScopeRoleDao extends BaseMapper<DataScopeRoleEntity> {
      * @param roleId
      * @return
      */
-    List<DataScopeRoleEntity> listByRoleId(@Param("roleId") Long roleId);
+    List<DataScopeRoleEntity> listByRoleId(@Param(value = "roleId") Long roleId);
 
     /**
      * 获取某批角色的所有数据范围配置信息
      * @param roleIdList
      * @return
      */
-    List<DataScopeRoleEntity> listByRoleIdList(@Param("roleIdList") List<Long> roleIdList);
+    List<DataScopeRoleEntity> listByRoleIdList(@Param(value = "roleIdList") List<Long> roleIdList);
 
     /**
      * 删除某个角色的设置信息
      * @param roleId
      * @return
      */
-    void deleteByRoleId(@Param("roleId") Long roleId);
+    void deleteByRoleId(@Param(value = "roleId") Long roleId);
 
 
     /**
      * 批量添加设置信息
      * @param list
      */
-    void batchInsert(@Param("list")List<DataScopeRoleEntity> list);
+    void batchInsert(@Param(value = "list")List<DataScopeRoleEntity> list);
 
 }
