@@ -2,6 +2,7 @@ package cn.congee.api.module.business.log.orderoperatelog.domain.dto;
 
 import cn.congee.api.module.business.log.orderoperatelog.constant.OrderOperateLogOperateTypeConst;
 import cn.congee.api.module.business.log.orderoperatelog.constant.OrderOperateLogOrderTypeEnum;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -12,44 +13,28 @@ import lombok.Data;
 @Data
 public class OrderOperateLogSaveDTO {
 
-    /**
-     * 各种单据的id
-     */
+    @ApiModelProperty("各种单据的id")
     private Long orderId;
 
-    /**
-     * 单据类型
-     */
+    @ApiModelProperty("单据类型")
     private OrderOperateLogOrderTypeEnum orderType;
 
-    /**
-     * 操作类型
-     */
+    @ApiModelProperty("操作类型")
     private OrderOperateLogOperateTypeConst operateType;
 
-    /**
-     *操作类型 对应的中文
-     */
+    @ApiModelProperty("操作类型 对应的中文")
     private String operateContent;
 
-    /**
-     * 操作备注
-     */
+    @ApiModelProperty("操作备注")
     private String operateRemark;
 
-    /**
-     * 员工id
-     */
+    @ApiModelProperty("员工id")
     private Long employeeId;
 
-    /**
-     * 员工名称
-     */
+    @ApiModelProperty("员工名称")
     private String employeeName;
 
-    /**
-     * 额外信息
-     */
+    @ApiModelProperty("额外信息")
     private String extData;
 
     public OrderOperateLogSaveDTO() {
