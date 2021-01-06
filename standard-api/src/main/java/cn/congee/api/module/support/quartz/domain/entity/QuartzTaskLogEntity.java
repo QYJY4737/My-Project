@@ -43,6 +43,9 @@ public class QuartzTaskLogEntity extends BaseEntity {
      */
     private String processLog;
 
+    /**
+     * ipAddress
+     */
     private String ipAddress;
 
 }
