@@ -1,8 +1,8 @@
 package cn.congee.api.module.support.idgenerator;
 
 import cn.congee.api.common.exception.StandardBusinessException;
-import cn.congee.api.module.support.idgenerator.domain.IdGeneratorLastNumberDTO;
-import cn.congee.api.module.support.idgenerator.domain.IdGeneratorPOJO;
+import cn.congee.api.module.support.idgenerator.domain.dto.IdGeneratorLastNumberDTO;
+import cn.congee.api.module.support.idgenerator.domain.pojo.IdGeneratorPOJO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
