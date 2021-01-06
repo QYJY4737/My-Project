@@ -26,7 +26,7 @@ public interface DepartmentDao extends BaseMapper<DepartmentEntity> {
      * @param departmentId
      * @return int 子部门的数量
      */
-    Integer countSubDepartment(@Param("departmentId") Long departmentId);
+    Integer countSubDepartment(@Param(value = "departmentId") Long departmentId);
 
     /**
      * 获取全部部门列表
@@ -43,6 +43,6 @@ public interface DepartmentDao extends BaseMapper<DepartmentEntity> {
      * @auther yandanyang
      * @date 2018/8/25 0025 上午 9:46
      */
-    List<DepartmentVO> selectByParentId(@Param("departmentId") Long departmentId);
+    List<DepartmentVO> selectByParentId(@Param(value = "departmentId") Long departmentId);
 
 }
