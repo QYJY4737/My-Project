@@ -10,7 +10,9 @@ package cn.congee.api.module.support.codegenerator.constant;
 public enum SqlOperateTypeEnum {
 
     LIKE(1, "like"),
+
     EQUALS(2, "equals"),
+
     IN(3, "in");
 
     private Integer type;
