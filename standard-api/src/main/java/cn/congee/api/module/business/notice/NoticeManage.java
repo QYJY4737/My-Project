@@ -23,11 +23,13 @@ public class NoticeManage {
 
     @Autowired
     private NoticeDao noticeDao;
+
     @Autowired
     private NoticeReceiveRecordDao noticeReceiveRecordDao;
 
     /**
      * 发送消息
+     *
      * @param entity
      * @param requestToken
      */
@@ -45,9 +47,9 @@ public class NoticeManage {
         noticeReceiveRecordDao.insert(recordEntity);
     }
 
-
     /**
      * 保存读取记录
+     *
      * @param noticeId
      * @param requestToken
      */
@@ -60,9 +62,9 @@ public class NoticeManage {
         noticeReceiveRecordDao.insert(recordEntity);
     }
 
-
     /**
      * 消息删除
+     *
      * @param entity
      */
     @Transactional(rollbackFor = Exception.class)
@@ -78,6 +80,7 @@ public class NoticeManage {
 
     /**
      * 更新消息
+     *
      * @param entity
      * @param updateDTO
      */
