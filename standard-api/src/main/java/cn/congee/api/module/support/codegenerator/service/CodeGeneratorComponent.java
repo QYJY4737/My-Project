@@ -16,6 +16,7 @@ import java.util.Map;
 public class CodeGeneratorComponent {
 
     private static Map<String, String> dataMap = new HashMap<>(16);
+
     private static Map<String, String> numberTypeMap = new HashMap<>(16);
 
     static {
