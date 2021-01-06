@@ -27,7 +27,7 @@ public interface NoticeDao extends BaseMapper<NoticeEntity> {
      * @return NoticeEntity
      */
     @DataScope(joinSql = "n.create_user in (#employeeIds)", whereInType = DataScopeWhereInTypeEnum.EMPLOYEE)
-    List<NoticeVO> queryByPage(Page page, @Param("queryDTO") NoticeQueryDTO queryDTO);
+    List<NoticeVO> queryByPage(Page page, @Param(value = "queryDTO") NoticeQueryDTO queryDTO);
 
     /**
      * 获取某人的未读消息
@@ -36,7 +36,7 @@ public interface NoticeDao extends BaseMapper<NoticeEntity> {
      * @return
      */
     @DataScope(joinSql = "e.department_id in (#departmentIds)", whereInType = DataScopeWhereInTypeEnum.DEPARTMENT)
-    List<NoticeVO> queryUnreadByPage(Page page, @Param("employeeId") Long employeeId, @Param("sendStatus") Integer sendStatus);
+    List<NoticeVO> queryUnreadByPage(Page page, @Param(value = "employeeId") Long employeeId, @Param(value = "sendStatus") Integer sendStatus);
 
     /**
      * 获取
@@ -44,21 +44,21 @@ public interface NoticeDao extends BaseMapper<NoticeEntity> {
      * @param queryDTO
      * @return
      */
-    List<NoticeReceiveDTO> queryReceiveByPage(Page page, @Param("queryDTO") NoticeReceiveQueryDTO queryDTO);
+    List<NoticeReceiveDTO> queryReceiveByPage(Page page, @Param(value = "queryDTO") NoticeReceiveQueryDTO queryDTO);
 
     /**
      * 详情
      * @param id
      * @return
      */
-    NoticeDetailVO detail(@Param("id") Long id);
+    NoticeDetailVO detail(@Param(value = "id") Long id);
 
     /**
      * 根据id删除 逻辑删除
      * @param id
      * @param deletedFlag
      */
-    void logicDeleteById(@Param("id") Long id,@Param("deletedFlag") Integer deletedFlag);
+    void logicDeleteById(@Param(value = "id") Long id, @Param(value = "deletedFlag") Integer deletedFlag);
 
     /**
      * 批量逻辑删除
@@ -66,20 +66,20 @@ public interface NoticeDao extends BaseMapper<NoticeEntity> {
      * @param deletedFlag
      * @return
      */
-    void logicDeleteByIds(@Param("idList") List<Long> idList,@Param("deletedFlag") Integer deletedFlag);
+    void logicDeleteByIds(@Param(value = "idList") List<Long> idList, @Param(value = "deletedFlag") Integer deletedFlag);
 
     /**
      * 获取消息总数
      * @return
      */
-    Integer noticeCount(@Param("sendStatus") Integer sendStatus);
+    Integer noticeCount(@Param(value = "sendStatus") Integer sendStatus);
 
     /**
      * 获取已读消息数
      * @param employeeIds
      * @return
      */
-    List<NoticeReadCountDTO> readCount(@Param("employeeIds") List<Long> employeeIds);
+    List<NoticeReadCountDTO> readCount(@Param(value = "employeeIds") List<Long> employeeIds);
 
     /**
      * 获取某人的未读消息数
@@ -87,6 +87,6 @@ public interface NoticeDao extends BaseMapper<NoticeEntity> {
      * @param sendStatus
      * @return
      */
-    Integer noticeUnreadCount(@Param("employeeId") Long employeeId, @Param("sendStatus") Integer sendStatus);
+    Integer noticeUnreadCount(@Param(value = "employeeId") Long employeeId, @Param(value = "sendStatus") Integer sendStatus);
 
 }
