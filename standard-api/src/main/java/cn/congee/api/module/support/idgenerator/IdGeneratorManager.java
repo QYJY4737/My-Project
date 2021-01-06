@@ -24,6 +24,13 @@ public class IdGeneratorManager {
     @Autowired
     private IdGeneratorDao idGeneratorDao;
 
+    /**
+     * generate id生成器
+     *
+     * @param idGeneratorPOJO
+     * @param stepLength
+     * @return
+     */
     @Transactional(rollbackFor = Exception.class)
     public long[] generate(IdGeneratorPOJO idGeneratorPOJO, int stepLength) {
         IdGeneratorLastNumberDTO idGeneratorLastNumberDTO = idGeneratorDao.selectLastNumber(idGeneratorPOJO.getIdGeneratorEntity().getId());
