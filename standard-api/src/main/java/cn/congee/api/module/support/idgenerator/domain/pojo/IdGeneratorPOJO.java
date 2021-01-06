@@ -1,6 +1,7 @@
-package cn.congee.api.module.support.idgenerator.domain;
+package cn.congee.api.module.support.idgenerator.domain.pojo;
 
 import cn.congee.api.module.support.idgenerator.constant.IdGeneratorRuleTypeEnum;
+import cn.congee.api.module.support.idgenerator.domain.entity.IdGeneratorEntity;
 
 /**
  * Created by wgb
@@ -10,10 +11,15 @@ import cn.congee.api.module.support.idgenerator.constant.IdGeneratorRuleTypeEnum
 public class IdGeneratorPOJO {
 
     private IdGeneratorRuleTypeEnum idGeneratorRuleTypeEnum;
+
     private IdGeneratorEntity idGeneratorEntity;
+
     private int numberCount = 0;
+
     private boolean haveYear = false;
+
     private boolean haveMonth = false;
+
     private boolean haveDay = false;
 
     public IdGeneratorPOJO(IdGeneratorRuleTypeEnum idGeneratorRuleTypeEnum, IdGeneratorEntity idGeneratorEntity) {
