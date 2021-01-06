@@ -22,6 +22,7 @@ public class DepartmentTreeService {
 
     /**
      * 构建部门树结构
+     *
      * @param departmentVOList
      * @return
      */
@@ -37,7 +38,13 @@ public class DepartmentTreeService {
         return list;
     }
 
-    private void buildTree(List<DepartmentVO> nodeList,List<DepartmentVO> departmentVOList){
+    /**
+     * 构建部门树结构
+     *
+     * @param nodeList
+     * @param departmentVOList
+     */
+    private void buildTree(List<DepartmentVO> nodeList, List<DepartmentVO> departmentVOList){
         int nodeSize = nodeList.size();
         for(int i =0 ;i< nodeSize;i++){
             int preIndex = i-1;
@@ -53,6 +60,12 @@ public class DepartmentTreeService {
         }
     }
 
+    /**
+     * 构建部门树结构
+     *
+     * @param node
+     * @param departmentVOList
+     */
     private void buildTree(DepartmentVO node, List<DepartmentVO> departmentVOList) {
         List<DepartmentVO> children = getChildren(node, departmentVOList);
         if (CollectionUtils.isNotEmpty(children)) {
@@ -61,15 +74,23 @@ public class DepartmentTreeService {
         }
     }
 
+    /**
+     * 获取子级部门
+     *
+     * @param node
+     * @param departmentVOList
+     * @return
+     */
     private List<DepartmentVO> getChildren(DepartmentVO node, List<DepartmentVO> departmentVOList) {
         Long id = node.getId();
         return departmentVOList.stream().filter(e -> id.equals(e.getParentId())).collect(Collectors.toList());
     }
 
-
-
     /**
      * 通过部门id,获取当前以及下属部门
+     *
+     * @param deptId
+     * @param result
      */
     public void buildIdList(Long deptId, List<Long> result) {
         List<DepartmentVO> departmentVOList = departmentDao.listAll();
@@ -87,6 +108,13 @@ public class DepartmentTreeService {
         }
     }
 
+    /**
+     * 获取子级部门列表
+     *
+     * @param deptId
+     * @param departmentVOList
+     * @return
+     */
     private List<DepartmentVO> getChildrenIdList(Long deptId, List<DepartmentVO> departmentVOList) {
         return departmentVOList.stream().filter(e -> deptId.equals(e.getParentId())).collect(Collectors.toList());
     }
