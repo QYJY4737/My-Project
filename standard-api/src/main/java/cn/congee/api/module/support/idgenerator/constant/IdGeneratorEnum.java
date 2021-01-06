@@ -15,6 +15,7 @@ public enum IdGeneratorEnum {
     ORDER(1, "order");
 
     private long id;
+
     private String keyName;
 
     IdGeneratorEnum(int id, String keyName) {
