@@ -1,8 +1,8 @@
 package cn.congee.api.module.support.idgenerator;
 
-import cn.congee.api.module.support.idgenerator.domain.IdGeneratorEntity;
-import cn.congee.api.module.support.idgenerator.domain.IdGeneratorLastNumberDTO;
-import cn.congee.api.module.support.idgenerator.domain.IdGeneratorRecordDTO;
+import cn.congee.api.module.support.idgenerator.domain.entity.IdGeneratorEntity;
+import cn.congee.api.module.support.idgenerator.domain.dto.IdGeneratorLastNumberDTO;
+import cn.congee.api.module.support.idgenerator.domain.dto.IdGeneratorRecordDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
