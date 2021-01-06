@@ -1,5 +1,6 @@
 package cn.congee.api.module.business.peony.domain.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -12,6 +13,7 @@ import lombok.Data;
 @Data
 public class PeonyUpdateDTO extends PeonyAddDTO{
 
+    @ApiModelProperty("ID")
     private Long id;
 
 }
