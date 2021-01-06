@@ -1,6 +1,6 @@
 package cn.congee.api.module.support.codegenerator.dao;
 
-import cn.congee.api.module.support.codegenerator.domain.ColumnVO;
+import cn.congee.api.module.support.codegenerator.domain.vo.ColumnVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -21,13 +21,13 @@ public interface TableDao {
      * @param tableName
      * @return
      */
-    String selectTableDesc(@Param("tableName") String tableName);
+    String selectTableDesc(@Param(value = "tableName") String tableName);
 
     /**
      * 查询表列信息
      * @param tableName
      * @return
      */
-    List<ColumnVO> selectTableColumn(@Param("tableName") String tableName);
+    List<ColumnVO> selectTableColumn(@Param(value = "tableName") String tableName);
 
 }
