@@ -26,20 +26,20 @@ public interface UserLoginLogDao extends BaseMapper<UserLoginLogEntity> {
      * @param queryDTO
      * @return UserLoginLogEntity
      */
-    List<UserLoginLogEntity> queryByPage(Page page, @Param("queryDTO") UserLoginLogQueryDTO queryDTO);
+    List<UserLoginLogEntity> queryByPage(Page page, @Param(value = "queryDTO") UserLoginLogQueryDTO queryDTO);
 
     /**
      * 根据id删除
      * @param id
      * @return
      */
-    void deleteById(@Param("id") Long id);
+    void deleteById(@Param(value = "id") Long id);
 
     /**
      * 批量删除
      * @param idList
      * @return
      */
-    void deleteByIds(@Param("idList") List<Long> idList);
+    void deleteByIds(@Param(value = "idList") List<Long> idList);
 
 }
