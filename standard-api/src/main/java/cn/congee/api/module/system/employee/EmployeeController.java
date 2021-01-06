@@ -55,7 +55,7 @@ public class EmployeeController {
 
     @ApiOperation(value = "禁用单个员工", notes = "禁用单个员工")
     @GetMapping("/updateStatus/{employeeId}/{status}")
-    public ResponseDTO<String> updateStatus(@PathVariable("employeeId") Long employeeId, @PathVariable("status") Integer status) {
+    public ResponseDTO<String> updateStatus(@PathVariable(value = "employeeId") Long employeeId, @PathVariable(value = "status") Integer status) {
         return employeeService.updateStatus(employeeId, status);
     }
 
@@ -73,7 +73,7 @@ public class EmployeeController {
 
     @ApiOperation(value = "根据员工ID删除员工信息", notes = "根据员工ID删除员工信息")
     @PostMapping("/delete/{employeeId}")
-    public ResponseDTO<String> deleteEmployeeById(@PathVariable("employeeId") Long employeeId) {
+    public ResponseDTO<String> deleteEmployeeById(@PathVariable(value = "employeeId") Long employeeId) {
         return employeeService.deleteEmployeeById(employeeId);
     }
 
@@ -92,13 +92,13 @@ public class EmployeeController {
 
     @ApiOperation(value = "通过部门id获取当前部门的人员&没有部门的人", notes = "通过部门id获取当前部门的人员&没有部门的人")
     @GetMapping("/listEmployeeByDeptId/{deptId}")
-    public ResponseDTO<List<EmployeeVO>> listEmployeeByDeptId(@PathVariable Long deptId) {
+    public ResponseDTO<List<EmployeeVO>> listEmployeeByDeptId(@PathVariable(value = "deptId") Long deptId) {
         return employeeService.getEmployeeByDeptId(deptId);
     }
 
     @ApiOperation(value = "员工重置密码", notes = "员工重置密码")
     @GetMapping("/resetPasswd/{employeeId}")
-    public ResponseDTO resetPasswd(@PathVariable("employeeId") Integer employeeId) {
+    public ResponseDTO resetPasswd(@PathVariable(value = "employeeId") Integer employeeId) {
         return employeeService.resetPasswd(employeeId);
     }
 
