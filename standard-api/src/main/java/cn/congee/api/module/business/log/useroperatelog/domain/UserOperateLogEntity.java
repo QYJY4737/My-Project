@@ -28,6 +28,7 @@ public class UserOperateLogEntity extends BaseEntity {
      * 用户名称
      */
     private String userName;
+
     /**
      * 操作模块
      */
