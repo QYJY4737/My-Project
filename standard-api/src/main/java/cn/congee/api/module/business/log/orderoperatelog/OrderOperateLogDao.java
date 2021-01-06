@@ -22,9 +22,9 @@ import java.util.List;
 @Component
 public interface OrderOperateLogDao extends BaseMapper<OrderOperateLogEntity> {
 
-    List<OrderOperateLogEntity> listOrderOperateLogsByOrderTypeAndOrderId(@Param("orderId") Long orderId, @Param("orderTypeList") List<Integer> orderTypeList);
+    List<OrderOperateLogEntity> listOrderOperateLogsByOrderTypeAndOrderId(@Param(value = "orderId") Long orderId, @Param(value = "orderTypeList") List<Integer> orderTypeList);
 
-    List<OrderOperateLogEntity> listOrderOperateLogsByOrderTypeAndOrderIds(@Param("orderIds") List<Long> orderIds, @Param("orderTypeList") List<Integer> orderTypeList);
+    List<OrderOperateLogEntity> listOrderOperateLogsByOrderTypeAndOrderIds(@Param(value = "orderIds") List<Long> orderIds, @Param(value = "orderTypeList") List<Integer> orderTypeList);
 
     void batchInsert(List<OrderOperateLogEntity> list);
 
