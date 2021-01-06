@@ -1,7 +1,7 @@
 package cn.congee.api.module.support.quartz.dao;
 
 import cn.congee.api.module.support.quartz.domain.dto.QuartzQueryDTO;
-import cn.congee.api.module.support.quartz.domain.dto.QuartzTaskVO;
+import cn.congee.api.module.support.quartz.domain.vo.QuartzTaskVO;
 import cn.congee.api.module.support.quartz.domain.entity.QuartzTaskEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -25,13 +25,13 @@ public interface QuartzTaskDao extends BaseMapper<QuartzTaskEntity> {
      * @param taskId
      * @param taskStatus
      */
-    void updateStatus(@Param("taskId") Integer taskId, @Param("taskStatus") Integer taskStatus);
+    void updateStatus(@Param(value = "taskId") Integer taskId, @Param(value = "taskStatus") Integer taskStatus);
 
     /**
      * 查询列表
      * @param queryDTO
      * @return
      */
-    List<QuartzTaskVO> queryList(Page page, @Param("queryDTO") QuartzQueryDTO queryDTO);
+    List<QuartzTaskVO> queryList(Page page, @Param(value = "queryDTO") QuartzQueryDTO queryDTO);
 
 }
