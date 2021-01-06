@@ -37,6 +37,9 @@ public class PeonyService {
 
     /**
      * 根据id查询
+     *
+     * @param id
+     * @return
      */
     public PeonyEntity getById(Long id){
         return  peonyDao.selectById(id);
@@ -44,6 +47,7 @@ public class PeonyService {
 
     /**
      * 分页查询牡丹花
+     *
      * @param queryDTO
      * @return
      */
@@ -58,6 +62,7 @@ public class PeonyService {
 
     /**
      * 添加牡丹花
+     *
      * @param addDTO
      * @return
      */
@@ -70,6 +75,7 @@ public class PeonyService {
 
     /**
      * 修改牡丹花
+     *
      * @param updateDTO
      * @return
      */
@@ -83,6 +89,7 @@ public class PeonyService {
 
     /**
      * 批量删除牡丹花
+     *
      * @param idList
      * @return
      */
@@ -95,6 +102,7 @@ public class PeonyService {
 
     /**
      * 查询全部导出对象
+     *
      * @param queryDTO
      * @return
      */
@@ -107,6 +115,7 @@ public class PeonyService {
 
     /**
      * 批量查询导出对象
+     *
      * @param idList
      * @return
      */
