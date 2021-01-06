@@ -12,8 +12,11 @@ public enum DataScopeTypeEnum implements BaseEnum {
     DEFAULT(0,0,"默认类型","数据范围样例");
 
     private Integer value;
+
     private Integer sort;
+
     private String name;
+
     private String desc;
 
     DataScopeTypeEnum(Integer value,Integer sort,String name,String desc) {
