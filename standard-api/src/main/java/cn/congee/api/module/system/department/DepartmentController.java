@@ -44,7 +44,7 @@ public class DepartmentController {
 
     @ApiOperation(value = "根据部门名称查询部门及员工列表", notes = "根据部门名称查询部门及员工列表")
     @GetMapping("/listEmployeeByDepartmentName")
-    public ResponseDTO<List<DepartmentVO>> listDepartmentEmployee(String departmentName) {
+    public ResponseDTO<List<DepartmentVO>> listDepartmentEmployee(@RequestParam(value = "departmentName") String departmentName) {
         return departmentService.listAllDepartmentEmployee(departmentName);
     }
 
@@ -62,13 +62,13 @@ public class DepartmentController {
 
     @ApiOperation(value = "根据id删除部门", notes = "根据id删除部门")
     @PostMapping("/delete/{departmentId}")
-    public ResponseDTO<String> delDepartment(@PathVariable("departmentId") Long departmentId) {
+    public ResponseDTO<String> delDepartment(@PathVariable(value = "departmentId") Long departmentId) {
         return departmentService.delDepartment(departmentId);
     }
 
     @ApiOperation(value = "根据id获取部门信息", notes = "根据id获取部门信息")
     @GetMapping("/query/{departmentId}")
-    public ResponseDTO<DepartmentVO> getDepartment(@PathVariable("departmentId") Long departmentId) {
+    public ResponseDTO<DepartmentVO> getDepartment(@PathVariable(value = "departmentId") Long departmentId) {
         return departmentService.getDepartmentById(departmentId);
     }
 
@@ -81,19 +81,19 @@ public class DepartmentController {
 
     @ApiOperation(value = "上下移动", notes = "上下移动")
     @GetMapping("/upOrDown/{departmentId}/{swapId}")
-    public ResponseDTO<String> upOrDown(@PathVariable("departmentId") Long departmentId,@PathVariable("swapId") Long swapId) {
+    public ResponseDTO<String> upOrDown(@PathVariable(value = "departmentId") Long departmentId, @PathVariable(value = "swapId") Long swapId) {
         return departmentService.upOrDown(departmentId,swapId);
     }
 
     @ApiOperation(value = "部门升级", notes = "部门升级")
     @GetMapping("/upgrade/{departmentId}")
-    public ResponseDTO<String> upgrade(@PathVariable("departmentId") Long departmentId) {
+    public ResponseDTO<String> upgrade(@PathVariable(value = "departmentId") Long departmentId) {
         return departmentService.upgrade(departmentId);
     }
 
     @ApiOperation(value = "部门降级", notes = "部门降级")
     @GetMapping("/downgrade/{departmentId}/{preId}")
-    public ResponseDTO<String> downgrade(@PathVariable("departmentId") Long departmentId,@PathVariable("preId") Long preId) {
+    public ResponseDTO<String> downgrade(@PathVariable(value = "departmentId") Long departmentId, @PathVariable(value = "preId") Long preId) {
         return departmentService.downgrade(departmentId,preId);
     }
 
