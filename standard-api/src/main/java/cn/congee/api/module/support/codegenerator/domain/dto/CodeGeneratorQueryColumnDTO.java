@@ -1,6 +1,7 @@
-package cn.congee.api.module.support.codegenerator.domain;
+package cn.congee.api.module.support.codegenerator.domain.dto;
 
 import cn.congee.api.module.support.codegenerator.constant.SqlOperateTypeEnum;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -13,14 +14,10 @@ import lombok.Data;
 @Builder
 public class CodeGeneratorQueryColumnDTO {
 
-    /**
-     * 生成查询方法的查询列名
-     */
+    @ApiModelProperty("生成查询方法的查询列名")
     private String columnName;
 
-    /**
-     * 此列的查询动作
-     */
+    @ApiModelProperty("此列的查询动作")
     private SqlOperateTypeEnum sqlOperate;
 
 }
