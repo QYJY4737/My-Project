@@ -24,20 +24,20 @@ public interface EmailDao extends BaseMapper<EmailEntity> {
      * @param queryDTO
      * @return EmailEntity
      */
-    List<EmailEntity> queryByPage(Page page, @Param("queryDTO") EmailQueryDTO queryDTO);
+    List<EmailEntity> queryByPage(Page page, @Param(value = "queryDTO") EmailQueryDTO queryDTO);
 
     /**
      * 根据id删除
      * @param id
      * @return
      */
-    void deleteById(@Param("id") Long id);
+    void deleteById(@Param(value = "id") Long id);
 
     /**
      * 批量删除
      * @param idList
      * @return
      */
-    void deleteByIds(@Param("idList") List<Long> idList);
+    void deleteByIds(@Param(value = "idList") List<Long> idList);
 
 }
