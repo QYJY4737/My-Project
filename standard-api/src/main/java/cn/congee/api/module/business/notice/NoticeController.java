@@ -65,28 +65,28 @@ public class NoticeController {
     @ApiOperation(value = "根据ID删除消息", notes = "根据ID删除消息")
     @GetMapping("/delete/{id}")
     @NoValidPrivilege
-    public ResponseDTO<String> delete(@PathVariable("id") Long id) {
+    public ResponseDTO<String> delete(@PathVariable(value = "id") Long id) {
         return noticeService.delete(id);
     }
 
     @ApiOperation(value = "根据ID查询消息详情", notes = "根据ID查询消息详情")
     @GetMapping("/detail/{id}")
     @NoValidPrivilege
-    public ResponseDTO<NoticeDetailVO> detail(@PathVariable("id") Long id) {
+    public ResponseDTO<NoticeDetailVO> detail(@PathVariable(value = "id") Long id) {
         return noticeService.detail(id);
     }
 
     @ApiOperation(value = "发送消息", notes = "发送消息")
     @GetMapping("/send/{id}")
     @NoValidPrivilege
-    public ResponseDTO<NoticeDetailVO> send(@PathVariable("id") Long id) {
+    public ResponseDTO<NoticeDetailVO> send(@PathVariable(value = "id") Long id) {
         return noticeService.send(id, StandardRequestTokenUtil.getRequestUser());
     }
 
     @ApiOperation(value = "读取消息", notes = "读取消息")
     @GetMapping("/read/{id}")
     @NoValidPrivilege
-    public ResponseDTO<NoticeDetailVO> read(@PathVariable("id") Long id) {
+    public ResponseDTO<NoticeDetailVO> read(@PathVariable(value = "id") Long id) {
         return noticeService.read(id, StandardRequestTokenUtil.getRequestUser());
     }
 
