@@ -52,6 +52,7 @@ public class FileServiceQiNiuYun implements IFileService {
 
     @Autowired
     private StandardUploadUtil standardUploadUtil;
+
     @Autowired
     private SystemConfigService systemConfigService;
 
