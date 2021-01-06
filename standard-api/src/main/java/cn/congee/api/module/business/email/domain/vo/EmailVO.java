@@ -1,4 +1,4 @@
-package cn.congee.api.module.business.email.domain.dto;
+package cn.congee.api.module.business.email.domain.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
