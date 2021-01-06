@@ -33,9 +33,6 @@ public class EmployeeQueryExportDTO {
     @ApiModelProperty(hidden = true)
     private Integer isDisabled;
 
-    /**
-     * 删除状态 0否 1是
-     */
     @ApiModelProperty(value = "删除状态 0否 1是 不需要传", hidden = true)
     private Integer isDelete;
 
