@@ -19,6 +19,6 @@ import java.util.List;
 @Component
 public interface ReloadResultDao extends BaseMapper<ReloadResultEntity> {
 
-    List<ReloadResultEntity> query(@Param("tag") String tag);
+    List<ReloadResultEntity> query(@Param(value = "tag") String tag);
 
 }
