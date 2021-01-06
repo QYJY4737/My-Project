@@ -33,7 +33,7 @@ public interface HeartBeatRecordDao extends BaseMapper<HeartBeatRecordEntity> {
      * @param id
      * @param heartBeatTime
      */
-    void updateHeartBeatTimeById(@Param("id") Long id, @Param("heartBeatTime") Date heartBeatTime);
+    void updateHeartBeatTimeById(@Param(value = "id") Long id, @Param(value = "heartBeatTime") Date heartBeatTime);
 
     /**
      * 查询心跳日志
@@ -42,7 +42,6 @@ public interface HeartBeatRecordDao extends BaseMapper<HeartBeatRecordEntity> {
      * @return
      */
     HeartBeatRecordEntity query(HeartBeatRecordEntity heartBeatRecordEntity);
-
 
     /**
      * 分页查询心跳记录
