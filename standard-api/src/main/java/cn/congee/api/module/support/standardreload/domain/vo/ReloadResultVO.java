@@ -1,5 +1,6 @@
-package cn.congee.api.module.support.standardreload.domain.dto;
+package cn.congee.api.module.support.standardreload.domain.vo;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
@@ -14,34 +15,22 @@ import java.util.Date;
 @Data
 public class ReloadResultVO {
 
-    /**
-     * 加载项标签
-     */
+    @ApiModelProperty("加载项标签")
     private String tag;
 
-    /**
-     * 参数
-     */
+    @ApiModelProperty("参数")
     private String args;
 
-    /**
-     *  状态标识
-     */
+    @ApiModelProperty("状态标识")
     private String identification;
 
-    /**
-     * 运行结果
-     */
+    @ApiModelProperty("运行结果")
     private Boolean result;
 
-    /**
-     * 异常
-     */
+    @ApiModelProperty("异常")
     private String exception;
 
-    /**
-     * 创建时间
-     */
+    @ApiModelProperty("创建时间")
     private Date createTime;
 
 }
