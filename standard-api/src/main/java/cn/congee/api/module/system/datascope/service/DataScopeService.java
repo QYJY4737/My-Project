@@ -66,6 +66,11 @@ public class DataScopeService {
         return viewTypeList;
     }
 
+    /**
+     * 获取数据返回类型列表
+     *
+     * @return
+     */
     public List<DataScopeDTO> getDataScopeType() {
         List<DataScopeDTO> dataScopeTypeList = Lists.newArrayList();
         DataScopeTypeEnum[] enums = DataScopeTypeEnum.class.getEnumConstants();
