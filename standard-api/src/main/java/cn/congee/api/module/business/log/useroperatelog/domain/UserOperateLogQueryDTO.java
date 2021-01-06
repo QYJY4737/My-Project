@@ -18,7 +18,6 @@ public class UserOperateLogQueryDTO extends PageParamDTO {
     @ApiModelProperty("结束日期")
     private String endDate;
 
-
     @ApiModelProperty("用户名称")
     private String userName;
 
