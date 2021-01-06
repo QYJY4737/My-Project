@@ -22,7 +22,6 @@ public class NoticeVO {
     @ApiModelProperty("消息标题")
     private String title;
 
-
     @ApiModelProperty("消息创建人")
     private Long createUser;
 
