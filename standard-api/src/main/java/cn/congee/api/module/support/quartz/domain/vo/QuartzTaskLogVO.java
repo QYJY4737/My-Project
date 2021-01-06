@@ -1,4 +1,4 @@
-package cn.congee.api.module.support.quartz.domain.dto;
+package cn.congee.api.module.support.quartz.domain.vo;
 
 import cn.congee.api.module.support.quartz.constant.TaskResultEnum;
 import io.swagger.annotations.ApiModelProperty;
