@@ -1,5 +1,6 @@
-package cn.congee.api.module.business.log.orderoperatelog.domain.dto;
+package cn.congee.api.module.business.log.orderoperatelog.domain.vo;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -15,34 +16,22 @@ import java.util.Date;
 @Data
 public class SupplierOrderOperateVO {
 
-    /**
-     * 流水类型
-     */
+    @ApiModelProperty("流水类型")
     private Integer tradingType;
 
-    /**
-     * 总重
-     */
+    @ApiModelProperty("总重")
     private BigDecimal totalWeight;
 
-    /**
-     * 金额
-     */
+    @ApiModelProperty("金额")
     private BigDecimal amount;
 
-    /**
-     * 操作人名称
-     */
+    @ApiModelProperty("操作人名称")
     private String buyerName;
 
-    /**
-     * 备注
-     */
+    @ApiModelProperty("备注")
     private String remark;
 
-    /**
-     * 创建时间
-     */
+    @ApiModelProperty("创建时间")
     private Date createTime;
 
 }
