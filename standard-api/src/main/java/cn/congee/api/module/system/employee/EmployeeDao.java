@@ -32,14 +32,14 @@ public interface EmployeeDao extends BaseMapper<EmployeeEntity> {
      * @param queryDTO
      * @return
      */
-    List<EmployeeDTO> selectEmployeeList(Page page, @Param("queryDTO") EmployeeQueryDTO queryDTO);
+    List<EmployeeDTO> selectEmployeeList(Page page, @Param(value = "queryDTO") EmployeeQueryDTO queryDTO);
 
     /**
      * 不带分页查询员工列表
      * @param queryDTO
      * @return
      */
-    List<EmployeeDTO> selectEmployeeList(@Param("queryDTO") EmployeeQueryExportDTO queryDTO);
+    List<EmployeeDTO> selectEmployeeList(@Param(value = "queryDTO") EmployeeQueryExportDTO queryDTO);
 
     /**
      * 批量更新禁用状态
@@ -47,7 +47,7 @@ public interface EmployeeDao extends BaseMapper<EmployeeEntity> {
      * @param employeeIds
      * @param isDisabled
      */
-    void batchUpdateStatus(@Param("employeeIds") List<Long> employeeIds, @Param("isDisabled") Integer isDisabled);
+    void batchUpdateStatus(@Param(value = "employeeIds") List<Long> employeeIds, @Param(value = "isDisabled") Integer isDisabled);
 
     /**
      * 登录
@@ -56,7 +56,7 @@ public interface EmployeeDao extends BaseMapper<EmployeeEntity> {
      * @param loginPwd
      * @return
      */
-    EmployeeDTO login(@Param("loginName") String loginName, @Param("loginPwd") String loginPwd);
+    EmployeeDTO login(@Param(value = "loginName") String loginName, @Param(value = "loginPwd") String loginPwd);
 
     /**
      * 通过登录名查询
@@ -65,7 +65,7 @@ public interface EmployeeDao extends BaseMapper<EmployeeEntity> {
      * @param isDisabled
      * @return
      */
-    EmployeeDTO getByLoginName(@Param("loginName") String loginName, @Param("isDisabled") Integer isDisabled);
+    EmployeeDTO getByLoginName(@Param(value = "loginName") String loginName, @Param(value = "isDisabled") Integer isDisabled);
 
     /**
      * 通过手机号查询
@@ -74,7 +74,7 @@ public interface EmployeeDao extends BaseMapper<EmployeeEntity> {
      * @param isDisabled
      * @return
      */
-    EmployeeDTO getByPhone(@Param("phone") String phone, @Param("isDisabled") Integer isDisabled);
+    EmployeeDTO getByPhone(@Param(value = "phone") String phone, @Param(value = "isDisabled") Integer isDisabled);
 
     /**
      * 获取所有员工
@@ -89,7 +89,7 @@ public interface EmployeeDao extends BaseMapper<EmployeeEntity> {
      * @param departmentId
      * @return
      */
-    Integer countByDepartmentId(@Param("departmentId") Long departmentId);
+    Integer countByDepartmentId(@Param(value = "departmentId") Long departmentId);
 
     /**
      * 获取一批员工
@@ -97,17 +97,17 @@ public interface EmployeeDao extends BaseMapper<EmployeeEntity> {
      * @param employeeIds
      * @return
      */
-    List<EmployeeDTO> getEmployeeByIds(@Param("ids") Collection<Long> employeeIds);
+    List<EmployeeDTO> getEmployeeByIds(@Param(value = "ids") Collection<Long> employeeIds);
 
 
-    EmployeeDTO getEmployeeById(@Param("id") Long employeeId);
+    EmployeeDTO getEmployeeById(@Param(value = "id") Long employeeId);
     /**
      * 获取某个部门的员工
      *
      * @param departmentId
      * @return
      */
-    List<EmployeeVO> getEmployeeIdByDeptId(@Param("departmentId") Long departmentId);
+    List<EmployeeVO> getEmployeeIdByDeptId(@Param(value = "departmentId") Long departmentId);
 
     /**
      * 获取某批部门的员工
@@ -115,7 +115,7 @@ public interface EmployeeDao extends BaseMapper<EmployeeEntity> {
      * @param departmentIds
      * @return
      */
-    List<EmployeeDTO> getEmployeeIdByDeptIds(@Param("departmentIds") List<Long> departmentIds);
+    List<EmployeeDTO> getEmployeeIdByDeptIds(@Param(value = "departmentIds") List<Long> departmentIds);
 
 
     /**
@@ -125,7 +125,7 @@ public interface EmployeeDao extends BaseMapper<EmployeeEntity> {
      * @param password
      * @return
      */
-    Integer updatePassword(@Param("employeeId") Integer employeeId, @Param("password") String password);
+    Integer updatePassword(@Param(value = "employeeId") Integer employeeId, @Param(value = "password") String password);
 
 
     /**
