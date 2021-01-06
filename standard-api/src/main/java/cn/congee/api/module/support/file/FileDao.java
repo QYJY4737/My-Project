@@ -44,7 +44,7 @@ public interface FileDao extends BaseMapper<FileEntity> {
      * @param moduleId
      * @return
      */
-    Integer deleteFilesByModuleId(@Param("moduleId") String moduleId);
+    Integer deleteFilesByModuleId(@Param(value = "moduleId") String moduleId);
 
     /**
      * 批量删除
@@ -53,22 +53,51 @@ public interface FileDao extends BaseMapper<FileEntity> {
      * @param moduleType
      * @return
      */
-    Integer deleteFilesByModuleIdAndModuleType(@Param("moduleId") String moduleId, @Param("moduleType") String moduleType);
+    Integer deleteFilesByModuleIdAndModuleType(@Param(value = "moduleId") String moduleId, @Param(value = "moduleType") String moduleType);
 
     /**
      * @param moduleId
      * @return
      */
-    List<FileVO> listFilesByModuleId(@Param("moduleId") String moduleId);
+    List<FileVO> listFilesByModuleId(@Param(value = "moduleId") String moduleId);
 
-    List<FileVO> listFilesByFileIds(@Param("fileIds") List<Long> fileIds);
+    /**
+     *
+     * @param fileIds
+     * @return
+     */
+    List<FileVO> listFilesByFileIds(@Param(value = "fileIds") List<Long> fileIds);
 
-    List<FileVO> listFilesByModuleIdAndModuleType(@Param("moduleId") String moduleId, @Param("moduleType") String moduleType);
+    /**
+     *
+     * @param moduleId
+     * @param moduleType
+     * @return
+     */
+    List<FileVO> listFilesByModuleIdAndModuleType(@Param(value = "moduleId") String moduleId, @Param(value = "moduleType") String moduleType);
 
-    List<FileVO> listFilesByModuleIdAndModuleTypes(@Param("moduleId") String moduleId, @Param("moduleTypes") List<String> moduleTypes);
+    /**
+     *
+     * @param moduleId
+     * @param moduleTypes
+     * @return
+     */
+    List<FileVO> listFilesByModuleIdAndModuleTypes(@Param(value = "moduleId") String moduleId, @Param(value = "moduleTypes") List<String> moduleTypes);
 
-    List<FileVO> listFilesByModuleIdsAndModuleType(@Param("moduleIds") List<String> moduleIds, @Param("moduleType") String moduleType);
+    /**
+     *
+     * @param moduleIds
+     * @param moduleType
+     * @return
+     */
+    List<FileVO> listFilesByModuleIdsAndModuleType(@Param(value = "moduleIds") List<String> moduleIds, @Param(value = "moduleType") String moduleType);
 
-    List<FileVO> queryListByPage(Page page, @Param("queryDTO") FileQueryDTO queryDTO);
+    /**
+     *
+     * @param page
+     * @param queryDTO
+     * @return
+     */
+    List<FileVO> queryListByPage(Page page, @Param(value = "queryDTO") FileQueryDTO queryDTO);
 
 }
