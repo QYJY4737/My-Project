@@ -6,7 +6,7 @@ import cn.congee.api.common.domain.ResponseDTO;
 import cn.congee.api.module.business.email.domain.dto.EmailConfigDTO;
 import cn.congee.api.module.business.email.domain.dto.EmailDTO;
 import cn.congee.api.module.business.email.domain.dto.EmailQueryDTO;
-import cn.congee.api.module.business.email.domain.dto.EmailVO;
+import cn.congee.api.module.business.email.domain.vo.EmailVO;
 import cn.congee.api.module.business.email.domain.entity.EmailEntity;
 import cn.congee.api.module.system.systemconfig.SystemConfigService;
 import cn.congee.api.module.system.systemconfig.constant.SystemConfigEnum;
