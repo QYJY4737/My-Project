@@ -16,6 +16,7 @@ import java.util.Date;
 @Data
 public class HeartBeatRecordVO implements Serializable {
 
+    @ApiModelProperty("主键id")
     private Integer id;
 
     @ApiModelProperty("项目名字")
