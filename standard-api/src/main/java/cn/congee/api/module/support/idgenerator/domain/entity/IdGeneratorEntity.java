@@ -1,4 +1,4 @@
-package cn.congee.api.module.support.idgenerator.domain;
+package cn.congee.api.module.support.idgenerator.domain.entity;
 
 import cn.congee.api.common.domain.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableName;
