@@ -119,6 +119,14 @@ public class DepartmentService {
         return departmentMap.values().stream().collect(Collectors.toList());
     }
 
+    /**
+     * 获得父级部门
+     *
+     * @param departmentVOList
+     * @param parentId
+     * @param result
+     * @return
+     */
     private List<DepartmentVO> getParentDepartment(List<DepartmentVO> departmentVOList, Long parentId, List<DepartmentVO> result) {
         List<DepartmentVO> deptList = departmentVOList.stream().filter(e -> e.getId().equals(parentId)).collect(Collectors.toList());
         for (DepartmentVO item : deptList) {
