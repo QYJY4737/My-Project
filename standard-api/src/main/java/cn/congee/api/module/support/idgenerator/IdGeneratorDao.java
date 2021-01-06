@@ -20,17 +20,17 @@ public interface IdGeneratorDao {
 
     List<IdGeneratorEntity> selectAll();
 
-    void updateLastNumber(@Param("generatorId") Long generatorId, @Param("lastNumber") Long lastNumber);
+    void updateLastNumber(@Param(value = "generatorId") Long generatorId, @Param(value = "lastNumber") Long lastNumber);
 
-    int replaceIdGeneratorRecord(@Param("generatorId") Long generatorId,//
-                                 @Param("year") int year,//
-                                 @Param("month") int month,//
-                                 @Param("day") int day,//
-                                 @Param("lastNumber") Long lastNumber);
+    int replaceIdGeneratorRecord(@Param(value = "generatorId") Long generatorId,
+                                 @Param(value = "year") int year,
+                                 @Param(value = "month") int month,
+                                 @Param(value = "day") int day,
+                                 @Param(value = "lastNumber") Long lastNumber);
 
-    IdGeneratorRecordDTO selectHistoryLastNumber(@Param("generatorId") Long generatorId,
-                                                 @Param("year") int year,
-                                                 @Param("month") int month,
-                                                 @Param("day") int day);
+    IdGeneratorRecordDTO selectHistoryLastNumber(@Param(value = "generatorId") Long generatorId,
+                                                 @Param(value = "year") int year,
+                                                 @Param(value = "month") int month,
+                                                 @Param(value = "day") int day);
 
 }
