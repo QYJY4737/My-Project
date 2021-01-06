@@ -5,8 +5,8 @@ import cn.congee.api.common.anno.OperateLog;
 import cn.congee.api.common.domain.ResponseDTO;
 import cn.congee.api.constant.SwaggerTagConst;
 import cn.congee.api.module.support.standardreload.domain.dto.ReloadItemUpdateDTO;
-import cn.congee.api.module.support.standardreload.domain.dto.ReloadItemVO;
-import cn.congee.api.module.support.standardreload.domain.dto.ReloadResultVO;
+import cn.congee.api.module.support.standardreload.domain.vo.ReloadItemVO;
+import cn.congee.api.module.support.standardreload.domain.vo.ReloadResultVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class StandardReloadController {
     @ApiOperation(value = "获取reload-result项", notes = "获取reload-result项")
     @GetMapping("/result/{tag}")
     @NoValidPrivilege
-    public ResponseDTO<List<ReloadResultVO>> queryReloadResult(@PathVariable("tag") String tag) {
+    public ResponseDTO<List<ReloadResultVO>> queryReloadResult(@PathVariable(value = "tag") String tag) {
         return standardReloadService.listReloadItemResult(tag);
     }
 
