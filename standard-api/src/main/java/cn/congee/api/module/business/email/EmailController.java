@@ -51,27 +51,24 @@ public class EmailController {
         return emailService.update(updateDTO);
     }
 
-
     @ApiOperation(value="根据id删除邮件",notes = "根据id删除邮件")
     @GetMapping("/delete/{id}")
     @NoValidPrivilege
-    public ResponseDTO<String> delete(@PathVariable("id") Long id){
+    public ResponseDTO<String> delete(@PathVariable(value = "id") Long id){
         return emailService.delete(id);
     }
-
 
     @ApiOperation(value="根据id查询邮件详情",notes = "根据id查询邮件详情")
     @GetMapping("/detail/{id}")
     @NoValidPrivilege
-    public ResponseDTO<EmailVO> detail(@PathVariable("id") Long id){
+    public ResponseDTO<EmailVO> detail(@PathVariable(value = "id") Long id){
         return emailService.detail(id);
     }
-
 
     @ApiOperation(value="发送某个已创建的邮件",notes = "发送某个已创建的邮件")
     @GetMapping("/send/{id}")
     @NoValidPrivilege
-    public ResponseDTO<String> send(@PathVariable("id") Long id){
+    public ResponseDTO<String> send(@PathVariable(value = "id") Long id){
         return emailService.send(id);
     }
 
