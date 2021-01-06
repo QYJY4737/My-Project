@@ -12,6 +12,7 @@ public enum EmailSendStatusEnum {
     SEND(1,"已发送");
 
     private Integer type;
+
     private String desc;
 
     EmailSendStatusEnum(Integer type, String desc) {
