@@ -87,11 +87,23 @@ public class DataScopeViewService {
         return Lists.newArrayList();
     }
 
+    /**
+     * 通过员工id获取部门id列表
+     *
+     * @param employeeId
+     * @return
+     */
     private List<Long> getMeDepartmentIdList(Long employeeId) {
         EmployeeEntity employeeEntity = employeeDao.selectById(employeeId);
         return Lists.newArrayList(employeeEntity.getDepartmentId());
     }
 
+    /**
+     * 通过员工id获取全部部门id列表
+     *
+     * @param employeeId
+     * @return
+     */
     private List<Long> getDepartmentAndSubIdList(Long employeeId) {
         EmployeeEntity employeeEntity = employeeDao.selectById(employeeId);
         List<Long> allDepartmentIds = Lists.newArrayList();
