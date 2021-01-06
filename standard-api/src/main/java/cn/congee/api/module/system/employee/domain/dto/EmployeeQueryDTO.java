@@ -28,9 +28,6 @@ public class EmployeeQueryDTO extends PageParamDTO {
 
     private Integer isDisabled;
 
-    /**
-     * 删除状态 0否 1是
-     */
     @ApiModelProperty("删除状态 0否 1是 不需要传")
     private Integer isDelete;
 
