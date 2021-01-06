@@ -40,7 +40,7 @@ public class DataScopeController {
     @ApiOperation(value = "获取某角色所设置的数据范围", notes = "获取某角色所设置的数据范围")
     @GetMapping("/listByRole/{roleId}")
     @NoValidPrivilege
-    public ResponseDTO<List<DataScopeSelectVO>> dataScopeListByRole(@PathVariable Long roleId) {
+    public ResponseDTO<List<DataScopeSelectVO>> dataScopeListByRole(@PathVariable(value = "roleId") Long roleId) {
         return dataScopeService.dataScopeListByRole(roleId);
     }
 
