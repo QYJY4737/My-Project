@@ -30,6 +30,7 @@ public class UserLoginLogEntity extends BaseEntity {
      * 用户名
      */
     private String userName;
+
     /**
      * 用户ip
      */
