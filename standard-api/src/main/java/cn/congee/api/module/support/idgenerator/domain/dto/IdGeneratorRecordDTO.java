@@ -1,4 +1,4 @@
-package cn.congee.api.module.support.idgenerator.domain;
+package cn.congee.api.module.support.idgenerator.domain.dto;
 
 import lombok.Data;
 
