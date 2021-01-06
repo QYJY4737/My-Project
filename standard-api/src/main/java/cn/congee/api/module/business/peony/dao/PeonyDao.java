@@ -29,34 +29,34 @@ public interface PeonyDao extends BaseMapper<PeonyEntity> {
      * @param queryDTO
      * @return PeonyVO
      */
-    IPage<PeonyVO> queryByPage(Page page, @Param("queryDTO") PeonyQueryDTO queryDTO);
+    IPage<PeonyVO> queryByPage(Page page, @Param(value = "queryDTO") PeonyQueryDTO queryDTO);
 
     /**
      * 根据id删除
      * @param id
      * @return
      */
-    void deleteById(@Param("id") Long id);
+    void deleteById(@Param(value = "id") Long id);
 
     /**
      * 根据id批量删除
      * @param idList
      * @return
      */
-    void deleteByIdList(@Param("idList") List<Long> idList);
+    void deleteByIdList(@Param(value = "idList") List<Long> idList);
 
     /**
      * 查询所有导出数据
      * @param queryDTO
      * @return
      */
-    List<PeonyExcelVO> queryAllExportData(@Param("queryDTO") PeonyQueryDTO queryDTO);
+    List<PeonyExcelVO> queryAllExportData(@Param(value = "queryDTO") PeonyQueryDTO queryDTO);
 
     /**
      * 查询批量导出数据
      * @param idList
      * @return
      */
-    List<PeonyExcelVO> queryBatchExportData(@Param("idList") List<Long> idList);
+    List<PeonyExcelVO> queryBatchExportData(@Param(value = "idList") List<Long> idList);
 
 }
