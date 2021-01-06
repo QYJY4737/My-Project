@@ -27,6 +27,12 @@ import java.util.Date;
 @Slf4j
 public class QuartzTask extends QuartzJobBean {
 
+    /**
+     * executeInternal
+     *
+     * @param context
+     * @throws JobExecutionException
+     */
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
         JobDetail jobDetail = context.getJobDetail();
