@@ -23,8 +23,14 @@ public class DataScopeSqlConfigDTO {
      */
     private Class joinSqlImplClazz;
 
+    /**
+     * joinSql
+     */
     private String joinSql;
 
+    /**
+     * whereIndex
+     */
     private Integer whereIndex;
 
     /**
