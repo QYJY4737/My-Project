@@ -41,10 +41,12 @@ public class EmployeeResponseCodeConst extends ResponseCodeConst {
      * 登录名已存在
      */
     public static final EmployeeResponseCodeConst LOGIN_NAME_EXISTS = new EmployeeResponseCodeConst(3006, "登录名已存在!");
+
     /**
      * 密码输入有误，请重新输入 10115
      */
     public static final EmployeeResponseCodeConst PASSWORD_ERROR = new EmployeeResponseCodeConst(3007, "密码输入有误，请重新输入");
+
     /**
      * 手机号已存在
      */
