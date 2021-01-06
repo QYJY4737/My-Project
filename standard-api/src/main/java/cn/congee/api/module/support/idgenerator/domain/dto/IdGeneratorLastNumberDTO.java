@@ -1,4 +1,4 @@
-package cn.congee.api.module.support.idgenerator.domain;
+package cn.congee.api.module.support.idgenerator.domain.dto;
 
 import java.util.Date;
 
@@ -10,7 +10,9 @@ import java.util.Date;
 public class IdGeneratorLastNumberDTO {
 
     private Date updateTime;
+
     private Long lastNumber;
+
     private Date databaseTime;
 
     public Date getUpdateTime() {
