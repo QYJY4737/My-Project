@@ -39,37 +39,37 @@ public class FileController {
 
     @ApiOperation(value = "文件本地上传", notes = "文件本地上传")
     @PostMapping("/localUpload/{moduleType}")
-    public ResponseDTO<UploadVO> localUpload(MultipartFile file, @PathVariable Integer moduleType) throws Exception {
+    public ResponseDTO<UploadVO> localUpload(@RequestParam(value = "file") MultipartFile file, @PathVariable Integer moduleType) throws Exception {
         return fileService.fileUpload(file, FileServiceTypeEnum.LOCAL, moduleType);
     }
 
     @ApiOperation(value = "获取本地文件URL", notes = "获取文件URL")
     @PostMapping("/get")
-    public ResponseDTO<String> localGetFile(String path) {
+    public ResponseDTO<String> localGetFile(@RequestParam(value = "path") String path) {
         return fileService.getFileUrl(path, FileServiceTypeEnum.LOCAL);
     }
 
     @ApiOperation(value = "文件阿里云上传", notes = "文件阿里云上传")
     @PostMapping("/aliYunUpload/{moduleType}")
-    public ResponseDTO<UploadVO> aliYunUpload(MultipartFile file, @PathVariable Integer moduleType) throws Exception {
+    public ResponseDTO<UploadVO> aliYunUpload(@RequestParam(value = "file") MultipartFile file, @PathVariable(value = "moduleType") Integer moduleType) throws Exception {
         return fileService.fileUpload(file, FileServiceTypeEnum.ALI_OSS, moduleType);
     }
 
     @ApiOperation(value = "获取阿里云文件URL", notes = "获取阿里云文件URL")
     @PostMapping("/aliYunGet")
-    public ResponseDTO<String> aliYunGet(String path) {
+    public ResponseDTO<String> aliYunGet(@RequestParam(value = "path") String path) {
         return fileService.getFileUrl(path, FileServiceTypeEnum.ALI_OSS);
     }
 
     @ApiOperation(value = "文件七牛云上传", notes = "文件七牛云上传")
     @PostMapping("/qiNiuUpload/{moduleType}")
-    public ResponseDTO<UploadVO> qiNiuUpload(MultipartFile file, @PathVariable Integer moduleType) throws Exception {
+    public ResponseDTO<UploadVO> qiNiuUpload(@RequestParam(value = "file") MultipartFile file, @PathVariable(value = "moduleType") Integer moduleType) throws Exception {
         return fileService.fileUpload(file, FileServiceTypeEnum.QI_NIU_OSS, moduleType);
     }
 
     @ApiOperation(value = "获取七牛云文件URL", notes = "获取七牛云URL")
     @PostMapping("/qiNiuGet")
-    public ResponseDTO<String> qiNiuGet(String path) {
+    public ResponseDTO<String> qiNiuGet(@RequestParam(value = "path") String path) {
         return fileService.getFileUrl(path, FileServiceTypeEnum.QI_NIU_OSS);
     }
 
@@ -82,7 +82,7 @@ public class FileController {
     @ApiOperation(value = "系统文件下载通用接口（流下载）", notes = "系统文件下载通用接口（流下载）")
     @GetMapping("/downLoad")
     @NoNeedLogin
-    public ResponseEntity<byte[]> downLoadById(Long id, HttpServletRequest request) {
+    public ResponseEntity<byte[]> downLoadById(@RequestParam(value = "id") Long id, HttpServletRequest request) {
         return fileService.downLoadById(id, request);
     }
 
