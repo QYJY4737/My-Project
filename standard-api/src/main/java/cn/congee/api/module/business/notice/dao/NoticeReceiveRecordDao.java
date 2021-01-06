@@ -23,7 +23,7 @@ public interface NoticeReceiveRecordDao extends BaseMapper<NoticeReceiveRecordEn
      * @param noticeId
      * @return
      */
-    void deleteByNoticeId(@Param("noticeId") Long noticeId);
+    void deleteByNoticeId(@Param(value = "noticeId") Long noticeId);
 
     /**
      * 批量插入
@@ -39,6 +39,6 @@ public interface NoticeReceiveRecordDao extends BaseMapper<NoticeReceiveRecordEn
      * @param noticeId
      * @return
      */
-    NoticeReceiveRecordEntity selectByEmployeeAndNotice(@Param("employeeId") Long employeeId, @Param("noticeId") Long noticeId);
+    NoticeReceiveRecordEntity selectByEmployeeAndNotice(@Param(value = "employeeId") Long employeeId, @Param(value = "noticeId") Long noticeId);
 
 }
