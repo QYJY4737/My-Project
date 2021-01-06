@@ -1,10 +1,10 @@
 package cn.congee.api.module.support.codegenerator.service;
 
 import cn.congee.api.module.support.codegenerator.dao.TableDao;
-import cn.congee.api.module.support.codegenerator.domain.CodeGeneratorDTO;
-import cn.congee.api.module.support.codegenerator.domain.CodeGeneratorQueryColumnDTO;
-import cn.congee.api.module.support.codegenerator.domain.ColumnVO;
-import cn.congee.api.module.support.codegenerator.domain.QueryFieldVO;
+import cn.congee.api.module.support.codegenerator.domain.dto.CodeGeneratorDTO;
+import cn.congee.api.module.support.codegenerator.domain.dto.CodeGeneratorQueryColumnDTO;
+import cn.congee.api.module.support.codegenerator.domain.vo.ColumnVO;
+import cn.congee.api.module.support.codegenerator.domain.vo.QueryFieldVO;
 import cn.congee.api.util.StandardDateUtil;
 import cn.congee.api.util.StandardStringUtil;
 import com.google.common.base.CaseFormat;
