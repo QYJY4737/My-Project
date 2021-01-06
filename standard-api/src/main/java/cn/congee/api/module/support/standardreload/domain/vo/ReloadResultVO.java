@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * reload_result DTO 类
+ * reload_result VO 类
  *
  * Created by wgb
  * Date: 2020/12/28
