@@ -9,6 +9,8 @@ import cn.congee.api.module.support.quartz.dao.QuartzTaskDao;
 import cn.congee.api.module.support.quartz.dao.QuartzTaskLogDao;
 import cn.congee.api.module.support.quartz.domain.dto.*;
 import cn.congee.api.module.support.quartz.domain.entity.QuartzTaskEntity;
+import cn.congee.api.module.support.quartz.domain.vo.QuartzTaskLogVO;
+import cn.congee.api.module.support.quartz.domain.vo.QuartzTaskVO;
 import cn.congee.api.third.StandardApplicationContext;
 import cn.congee.api.util.StandardBeanUtil;
 import cn.congee.api.util.StandardPageUtil;
@@ -96,6 +98,12 @@ public class QuartzTaskService {
         }
     }
 
+    /**
+     * baseValid
+     *
+     * @param quartzTaskDTO
+     * @return
+     */
     private ResponseDTO<String> baseValid(QuartzTaskDTO quartzTaskDTO) {
         Object taskBean = null;
         try {
@@ -112,6 +120,13 @@ public class QuartzTaskService {
         return ResponseDTO.succ();
     }
 
+    /**
+     * 保存任务
+     *
+     * @param quartzTaskDTO
+     * @return
+     * @throws Exception
+     */
     private ResponseDTO<String> saveTask(QuartzTaskDTO quartzTaskDTO) throws Exception {
         QuartzTaskEntity taskEntity = StandardBeanUtil.copy(quartzTaskDTO, QuartzTaskEntity.class);
         taskEntity.setTaskStatus(TaskStatusEnum.NORMAL.getStatus());
@@ -122,6 +137,13 @@ public class QuartzTaskService {
         return ResponseDTO.succ();
     }
 
+    /**
+     * 更新任务
+     *
+     * @param quartzTaskDTO
+     * @return
+     * @throws Exception
+     */
     private ResponseDTO<String> updateTask(QuartzTaskDTO quartzTaskDTO) throws Exception {
         QuartzTaskEntity updateEntity = quartzTaskDao.selectById(quartzTaskDTO.getId());
         if (updateEntity == null) {
@@ -275,6 +297,14 @@ public class QuartzTaskService {
         }
     }
 
+    /**
+     * 获取触发器key
+     *
+     * @param scheduler
+     * @param taskId
+     * @return
+     * @throws Exception
+     */
     private CronTrigger getCronTrigger(Scheduler scheduler, Long taskId) throws Exception {
         TriggerKey triggerKey = StandardQuartzUtil.getTriggerKey(taskId);
         return (CronTrigger) scheduler.getTrigger(triggerKey);
@@ -347,7 +377,13 @@ public class QuartzTaskService {
         scheduler.deleteJob(jobKey);
     }
 
-
+    /**
+     * checkExist
+     *
+     * @param taskId
+     * @return
+     * @throws Exception
+     */
     private Boolean checkExist(Long taskId) throws Exception{
         JobKey jobKey = StandardQuartzUtil.getJobKey(taskId);
         return scheduler.checkExists(jobKey);
